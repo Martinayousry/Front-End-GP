@@ -31,6 +31,12 @@ export default function Navigator() {
           <li>
             <NavLink to={"/lost"}>Online consultant</NavLink>
           </li>
+          <li>
+            <NavLink to={"/my-pets"}>My Pets</NavLink>
+          </li>
+          {/* <li>
+            <NavLink to={"/my-cart"}>My Cart</NavLink>
+          </li> */}
         </ul>
       </div>
     </div>

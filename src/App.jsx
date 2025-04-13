@@ -30,6 +30,8 @@ import Signup from "./Pages/Signup/Signup";
 import AddClinic from "./Pages/AddClinic";
 import DoctorDashboard from "./Pages/DoctorHome";
 import { Toaster } from "sonner";
+import DoctorSignup from "./Pages/Signup/SignupDoctors";
+import MyPets from "./Pages/MyPets";
 
 function App() {
   const router = createBrowserRouter(
@@ -38,6 +40,7 @@ function App() {
         <Route index element={<Home />} />
 
         <Route path="/login" element={<Login/>} />
+        <Route path="/doctor-signup" element={<DoctorSignup />} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/add-clinic" element={<AddClinic/>} />
 
@@ -54,6 +57,8 @@ function App() {
 
         <Route path="pet-profile/:id" element={<PetProfile />} />
         <Route path="add-pet-profile" element={<AddPetForm />} />
+        <Route path="my-pets" element={<MyPets />} />
+        {/* <Route path="my-cart" element={<Cart />} /> */}
 
         <Route path="volunteering" element={<Volunteering />} />
         <Route path="doctor-dashboard" element={<DoctorDashboard />} />

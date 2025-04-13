@@ -1,253 +1,201 @@
 import React, { useState } from "react";
 import "./AddPetForm.css";
 import { IoMdArrowForward } from "react-icons/io";
+import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
 import ThankYou from "../../components/ThankYou";
 
 const AddPetForm = () => {
   const [showModal, setShowModal] = useState(false);
+  const { token } = useAuth();
 
-  const handleDonate = (e) => {
+  const [petData, setPetData] = useState({
+    name: "",
+    age: "",
+    title: "",
+    breed: "",
+    gender: "",
+    healthIssues: "",
+    description: "",
+    photos: [],
+  });
+
+  const handleDonate = async (e) => {
     e.preventDefault();
+
     const form = e.target.closest("form");
-    if (form.checkValidity()) {
-      setShowModal(true);
-    } else {
+    if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", petData.name);
+    formData.append("age", petData.age);
+    formData.append("title", petData.title);
+    formData.append("breed", petData.breed);
+    formData.append("gender", petData.gender);
+    formData.append("healthIssues", petData.healthIssues);
+    formData.append("description", petData.description || "");
+
+    petData.photos.forEach((file) => {
+      formData.append("photos", file);
+    });
+
+    try {
+      const response = await axios.post("/api/Pet", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Pet added successfully:", response.data);
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error adding pet:", error.response?.data || error.message);
     }
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPetData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files || []);
+    setPetData((prev) => ({
+      ...prev,
+      photos: [...prev.photos, ...files],
+    }));
+  };
+
   return (
     <div className="add-pet mt-15">
       <p className="text-center p-10 text-xl">Add Pet Profile Form</p>
       <div className="add-pet-form">
         <form onSubmit={handleDonate}>
-          <div className="flex flex-row gap-10 items-center pt-7 ">
+          <div className="flex flex-row gap-10 items-center pt-7">
             <div>
-              <label htmlFor="firstName">First Name</label> <br />
+              <label htmlFor="name">Pet Name</label> <br />
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="name"
+                name="name"
                 className="input-field"
                 required
+                value={petData.name}
+                onChange={handleInputChange}
               />
             </div>
             <div>
-              <label htmlFor="lastName">Second Name</label> <br />
+              <label htmlFor="age">Age</label> <br />
               <input
-                type="text"
-                id="lastName"
-                name="lastName"
+                type="number"
+                id="age"
+                name="age"
                 className="input-field"
                 required
-              />
-            </div>
-          </div>
-          <div className="flex flex-row gap-10 items-center pt-5">
-            <div>
-              <label htmlFor="firstName">Email Address</label> <br />
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className="input-field"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="lastName">Phone Number</label> <br />
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="input-field"
-                required
+                value={petData.age}
+                onChange={handleInputChange}
               />
             </div>
           </div>
           <div className="flex flex-row gap-10 items-center pt-5">
             <div>
-              <label htmlFor="firstName">Address</label> <br />
+              <label htmlFor="title">Title</label> <br />
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="title"
+                name="title"
                 className="input-field"
                 required
+                value={petData.title}
+                onChange={handleInputChange}
               />
             </div>
             <div>
-              <label htmlFor="lastName">Government</label> <br />
+              <label htmlFor="breed">Breed</label> <br />
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
+                id="breed"
+                name="breed"
                 className="input-field"
                 required
+                value={petData.breed}
+                onChange={handleInputChange}
               />
             </div>
           </div>
           <div className="flex flex-row gap-10 items-center pt-5">
             <div>
-              <label htmlFor="firstName">Nationality</label> <br />
+              <label htmlFor="gender">Gender</label> <br />
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="gender"
+                name="gender"
                 className="input-field"
                 required
+                value={petData.gender}
+                onChange={handleInputChange}
               />
             </div>
             <div>
-              <label htmlFor="lastName">Gender</label> <br />
+              <label htmlFor="healthIssues">Health Status</label> <br />
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
+                id="healthIssues"
+                name="healthIssues"
                 className="input-field"
                 required
+                value={petData.healthIssues}
+                onChange={handleInputChange}
               />
             </div>
           </div>
           <div className="flex flex-row gap-10 items-center pt-5">
             <div>
-              <label htmlFor="firstName">First Name</label> <br />
+              <label htmlFor="description">Description (optional)</label> <br />
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="description"
+                name="description"
                 className="input-field"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="lastName">Age</label> <br />
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="input-field"
-                required
+                value={petData.description}
+                onChange={handleInputChange}
               />
             </div>
           </div>
-          <div className="flex flex-row gap-10 items-center pt-5">
-            <div>
-              <label htmlFor="firstName">First Name</label> <br />
+          <div className="upload-box">
+            <label className="upload-label">
               <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className="input-field"
-                required
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={handleImageUpload}
               />
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name</label> <br />
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="input-field"
-                required
-              />
-            </div>
+              <p className="text-blue-500">Click to upload or drag and drop</p>
+              <p className="text-gray-400">JPG, JPEG, PNG (less than 1MB)</p>
+            </label>
           </div>
-          <div className="flex flex-row gap-10 items-center pt-5">
-            <div>
-              <label htmlFor="firstName">First Name</label> <br />
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className="input-field"
-                required
+          <div className="image-preview">
+            {petData.photos.map((file, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(file)}
+                alt="Uploaded"
+                className="preview-img"
               />
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name</label> <br />
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="input-field"
-                required
-              />
-            </div>
+            ))}
           </div>
-          <div className="flex flex-row gap-10 items-center pt-5">
-            <div>
-              <label htmlFor="firstName">First Name</label> <br />
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className="input-field"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name</label> <br />
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="input-field"
-                required
-              />
-            </div>
-          </div>
-          <div className="flex flex-row gap-10 items-center pt-5">
-            <div>
-              <label htmlFor="firstName">First Name</label> <br />
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className="input-field"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name</label> <br />
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="input-field"
-                required
-              />
-            </div>
-          </div>
-          <div className="flex flex-row gap-10 items-center pt-5">
-            <div>
-              <label htmlFor="firstName">First Name</label> <br />
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className="input-field"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name</label> <br />
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="input-field"
-                required
-              />
-            </div>
-          </div>
+
           <button
             type="submit"
             className="submit-button inline-flex items-center justify-center my-12 ml-120"
-            onClick={handleDonate}
           >
             Submit
             <IoMdArrowForward className="text-2xl ml-2" />
           </button>
+
           <ThankYou show={showModal} onClose={() => setShowModal(false)} />
         </form>
       </div>

@@ -1,109 +1,128 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Signup.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [userType, setUserType] = useState("User");
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  // const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [specialization, setSpecialization] = useState("");
+  const [number, setNumber] = useState("");
+  const [medicalId, setMedicalId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  const handleUserTypeChange = (event) => {
-    setUserType(event.target.value);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const userData = {
+      username: username,
+      email: email,
+      password: password,
+      specialization: specialization,
+      number: number,
+      medicalId: medicalId,
+    };
+
+    try {
+      const response = await axios.post("/api/Auth/RegisterDoctor", userData);
+      console.log("Registration successful:", response.data);
+      navigate("/login");
+    } catch (error) {
+      console.error(
+        "Error during registration:",
+        error.response?.data || error.message
+      );
+      setErrorMessage(error.response?.data?.message || "Registration failed.");
+    }
   };
 
   return (
-    <div className="signup">
-      {/* Left Side: Form */}
+    <div className="signup mt-120">
       <div className="signup-form">
         <h1>Welcome!</h1>
         <h2>Sign up to access all features</h2>
-
-        {/* Full Name */}
-        <div className="input-container">
-          <label>Full Name</label>
-          <input
-            type="text"
-            placeholder="Enter your full name"
-            className="input-field"
-          />
-        </div>
-
-        {/* Email */}
-        <div className="input-container">
-          <label>Email Address</label>
-          <input
-            type="email"
-            placeholder="Enter your email address"
-            className="input-field"
-          />
-        </div>
-
-        {/* Phone Number */}
-        <div className="input-container">
-          <label>Phone Number</label>
-          <input
-            type="tel"
-            placeholder="Enter your phone number"
-            className="input-field"
-          />
-        </div>
-
-        {/* Password Input */}
-        <div className="input-container">
-          <label>Password</label>
-          <div className="password-input">
+        <form onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label>User Name</label>
             <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
+              type="text"
+              placeholder="Enter your full name"
               className="input-field"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
-            <span
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁"}
-            </span>
           </div>
-        </div>
-
-        {/* Sign in as */}
-        <div className="radio-container">
-          <span>Sign in as: </span>
-          <label className="radio-label">
+          <div className="input-container">
+            <label>Email Address</label>
             <input
-              type="radio"
-              name="userType"
-              value="User"
-              checked={userType === "User"}
-              onChange={handleUserTypeChange}
+              type="email"
+              placeholder="Enter your email address"
+              className="input-field"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            User
-          </label>
-          <label className="radio-label">
+          </div>
+          <div className="input-container">
+            <label>Phone Number</label>
             <input
-              type="radio"
-              name="userType"
-              value="Doctor"
-              checked={userType === "Doctor"}
-              onChange={handleUserTypeChange}
+              type="tel"
+              placeholder="Enter your phone number"
+              className="input-field"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
             />
-            Doctor
-          </label>
-        </div>
-
-        {/* Buttons */}
-        <button className="button">Log In</button>
-        <button className="google-button">Continue with Google</button>
-
-        {/* Register Link */}
-        <p className="register-text">
-          Don’t have an account?{" "}
-          <a href="/register" className="register-link">
-            Register
-          </a>
-        </p>
+          </div>
+          <div className="input-container">
+            <label>Password</label>
+            <div className="password-input">
+              <input
+                type="password"
+                placeholder="Enter your password"
+                className="input-field"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {/* <span
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "🙈" : "👁"}
+              </span> */}
+            </div>
+          </div>
+          <div className="input-container">
+            <label>Specialization</label>
+            <input
+              type="text"
+              placeholder="Enter your specialization"
+              className="input-field"
+              value={specialization}
+              onChange={(e) => setSpecialization(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <label>Medical ID</label>
+            <input
+              type="text"
+              placeholder="Enter your medical ID"
+              className="input-field"
+              value={medicalId}
+              onChange={(e) => setMedicalId(e.target.value)}
+            />
+          </div>
+          {errorMessage && <p className="error-text">{errorMessage}</p>}
+          <button type="submit" className="button">
+            Sign Up
+          </button>
+          <button type="button" className="google-button">
+            Continue with Google
+          </button>
+        </form>
       </div>
-
-      {/* Right Side: Image */}
-      <img src={"/images/care.jpeg"} alt="Sign Up" className="signup-image" />
+      <img src={"/images/login.jpeg"} alt="Sign Up" className="signup-image" />
     </div>
   );
 };
