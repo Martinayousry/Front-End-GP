@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../Context/AuthContext";
 
 export default function PetProfile() {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [activeTab, setActiveTab] = useState("Description");
+  const { token } = useAuth();
 
   const tabClasses = (tab) =>
     `px-4 py-2 font-medium ${
@@ -26,18 +28,45 @@ export default function PetProfile() {
     fetchPet();
   }, [id]);
 
+  const handleAddToFavorites = async () => {
+    try {
+      const response = await axios.post(
+        "/api/Cart/Add",
+        {
+          petId: null,
+          animalId: pet.animalId,
+          itemType: "animal",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Added to favorites!");
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      alert("Failed to add to favorites.");
+    }
+  };
+
   if (!pet) {
-    return <div className="text-center mt-20 text-gray-600">Loading pet details...</div>;
+    return (
+      <div className="text-center mt-20 text-gray-600">
+        Loading pet details...
+      </div>
+    );
   }
 
   return (
     <div className="bg-white mt-12">
-      <div className="w-full grid place-items-center ">
+      <div className="w-full grid place-items-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 p-4 gap-6 w-full max-w-7xl">
-          <div className="flex lg:flex-col items-center gap-4 p-6 sm:col-span-2 w-full ">
+          <div className="flex lg:flex-col items-center gap-4 p-6 sm:col-span-2 w-full">
             <div className="flex flex-col lg:flex-row items-center gap-4">
               {/* thumbnails */}
-              <div className="flex flex-row lg:flex-col gap-4 ">
+              <div className="flex flex-row lg:flex-col gap-4">
                 {pet.photoUrls.map((img, index) => (
                   <img
                     key={index}
@@ -76,7 +105,9 @@ export default function PetProfile() {
 
               <div className="mb-4">
                 <p className="font-medium text-gray-800">Health Info:</p>
-                <p className="text-gray-600">{pet.healthIssues || "No known issues"}</p>
+                <p className="text-gray-600">
+                  {pet.healthIssues || "No known issues"}
+                </p>
               </div>
 
               <div className="mb-4">
@@ -91,14 +122,16 @@ export default function PetProfile() {
 
             <div className="flex">
               <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
-                <Link to={"/adoption-form"}>
+                <Link to={`/adoption/adoption-form/${pet.animalId}`}>
                   Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
                 </Link>
               </button>
-              <button className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center">
-                <Link to={"/adoption-form"}>
-                  <i className="fa-regular fa-heart text-[#749260E5] hover:text-black"></i>
-                </Link>
+
+              <button
+                onClick={handleAddToFavorites}
+                className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center"
+              >
+                <i className="fa-regular fa-heart text-[#749260E5] hover:text-black"></i>
               </button>
             </div>
           </div>
@@ -116,7 +149,9 @@ export default function PetProfile() {
             >
               {tab}
               {tab === "Reviews" && (
-                <span className="ml-1 text-sm bg-gray-200 px-2 rounded-full">157</span>
+                <span className="ml-1 text-sm bg-gray-200 px-2 rounded-full">
+                  157
+                </span>
               )}
             </button>
           ))}

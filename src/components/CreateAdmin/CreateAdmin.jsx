@@ -3,14 +3,48 @@ import "./CreateAdmin.css";
 
 const CreateAdmin = () => {
   const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("New User created");
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/Auth/RegisterAdmin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setMessage("New admin created successfully.");
+        setFormData({ username: "", email: "", password: "" });
+      } else {
+        const errorData = await response.json();
+        setMessage(errorData.message || "Something went wrong.");
+      }
+    } catch (error) {
+      setMessage("Error connecting to the server.");
+      console.error("Registration error:", error);
+    }
   };
 
   return (
-    <div className="create-admin">
+    <div className="create-admin mt-15">
       <p className="title font-bold text-2xl border-b-1 border-gray-400 pb-4">
         Create New Admin
       </p>
@@ -23,6 +57,8 @@ const CreateAdmin = () => {
               id="username"
               name="username"
               className="input-field"
+              value={formData.username}
+              onChange={handleChange}
               required
             />
           </div>
@@ -33,6 +69,8 @@ const CreateAdmin = () => {
               id="email"
               name="email"
               className="input-field"
+              value={formData.email}
+              onChange={handleChange}
               required
             />
           </div>
@@ -43,6 +81,8 @@ const CreateAdmin = () => {
               id="password"
               name="password"
               className="input-field"
+              value={formData.password}
+              onChange={handleChange}
               required
             />
           </div>
@@ -50,9 +90,7 @@ const CreateAdmin = () => {
             Submit
           </button>
         </form>
-        {message && (
-          <p className="msg font-lg mt-4">{message}</p>
-        )}
+        {message && <p className="msg font-lg mt-4">{message}</p>}
       </div>
     </div>
   );

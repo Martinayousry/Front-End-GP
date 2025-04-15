@@ -32,6 +32,7 @@ import DoctorDashboard from "./Pages/DoctorHome";
 import { Toaster } from "sonner";
 import DoctorSignup from "./Pages/Signup/SignupDoctors";
 import MyPets from "./Pages/MyPets";
+import MyCart from "./Pages/MyCart";
 
 function App() {
   const router = createBrowserRouter(
@@ -39,10 +40,10 @@ function App() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
 
-        <Route path="/login" element={<Login/>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/doctor-signup" element={<DoctorSignup />} />
-        <Route path="/signup" element={<Signup/>} />
-        <Route path="/add-clinic" element={<AddClinic/>} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/add-clinic" element={<AddClinic />} />
 
         <Route path="clinics" element={<ClinicsLayout />}>
           <Route index element={<Clinics />} />
@@ -50,7 +51,7 @@ function App() {
         <Route path="clinic-details/:id" element={<ClinicDetails />} />
 
         <Route path="lost" element={<Lost />} />
-       
+
         <Route path="donation" element={<Donation />} />
         {/* <Route path="payment/:amount" element={<Payment />} />
         <Route path="code" element={<Code />} /> */}
@@ -58,14 +59,14 @@ function App() {
         <Route path="pet-profile/:id" element={<PetProfile />} />
         <Route path="add-pet-profile" element={<AddPetForm />} />
         <Route path="my-pets" element={<MyPets />} />
-        {/* <Route path="my-cart" element={<Cart />} /> */}
+        <Route path="my-cart" element={<MyCart />} />
 
         <Route path="volunteering" element={<Volunteering />} />
         <Route path="doctor-dashboard" element={<DoctorDashboard />} />
-        
+
         <Route path="adoption" element={<AdoptionLayout />}>
           <Route index element={<Adoption />} loader={adoptionLoader} />
-          <Route path="adoption-form" element={<AdoptionForm />} />
+          <Route path="adoption-form/:animalId" element={<AdoptionForm />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
@@ -81,11 +82,12 @@ function App() {
     )
   );
 
-  return <>
-    <RouterProvider router={router} />
+  return (
+    <>
+      <RouterProvider router={router} />
       <Toaster position="top-right" richColors closeButton />
     </>
- 
+  );
 }
 
 export default App;

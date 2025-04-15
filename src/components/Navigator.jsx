@@ -1,6 +1,6 @@
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React from "react";
-import './Navigator.css'
+import "./Navigator.css";
 
 export default function Navigator() {
   return (
@@ -34,9 +34,9 @@ export default function Navigator() {
           <li>
             <NavLink to={"/my-pets"}>My Pets</NavLink>
           </li>
-          {/* <li>
+          <li>
             <NavLink to={"/my-cart"}>My Cart</NavLink>
-          </li> */}
+          </li>
         </ul>
       </div>
     </div>

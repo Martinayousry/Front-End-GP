@@ -19,12 +19,12 @@ export default function Adoption() {
         {animals.length > 0 ? (
           animals.map((animal) => (
             <Card
-            key={animal.animalId}
-            animalId={animal.animalId}
-            title={animal.title}
-            description={animal.description}
-            gender={animal.gender}
-            photoUrls={animal.photoUrls}
+              key={animal.animalId}
+              id={animal.animalId}
+              title={animal.title}
+              description={animal.description}
+              gender={animal.gender}
+              photoUrls={animal.photoUrls}
             />
           ))
         ) : (
