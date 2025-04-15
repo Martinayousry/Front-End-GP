@@ -92,11 +92,11 @@ const Volunteering = () => {
             <div className="mb-5">
               <label>Gender</label> <br />
               <input type="radio" id="male" name="gender" value="male" />
-              <label for="male" className="m-3">
+              <label htmlFor="male" className="m-3">
                 Male
               </label>
               <input type="radio" id="female" name="gender" value="female" />
-              <label for="female" className="m-3">
+              <label htmlFor="female" className="m-3">
                 Female
               </label>
             </div>

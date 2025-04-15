@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import HeroSlider from "../components/HeroSlider";
 import ClinicCard from "../components/ClinicCard";
 import ClinicDetails from "./ClinicDetails";
-import PetProfile from "./PetProfile";
+import PetProfile from "./AnimalPetProfile/PetProfile";
 import Navigator from "../components/Navigator";
 import Footer from "../components/Footer";
 
@@ -18,7 +18,6 @@ export default function Home() {
           </div>
           <Navigator />
         </div>
-       
       </div>
       <div className="w-full px-4 py-8 max-w-7xl mx-auto">
         {/* Top Cards */}
@@ -120,7 +119,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-      
     </>
   );
 }

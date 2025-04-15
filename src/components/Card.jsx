@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 
-export default function Card({ animalId, title, description,gender ,photoUrls}) {
+export default function Card({ animalId, title, description,gender ,photoUrls,type}) {
+  const profileRoute = type === "pet" 
+  ? `/pet-profile/${animalId}` 
+  : `/animal-profile/${animalId}`;
   return (
     <>
       <div className="card w-[280px] h-[280px] bg-[#F9FAFB] flex items-center justify-center align-middle me-4  ">
-      <Link to={`/pet-profile/${animalId}`}>
+      <Link to={profileRoute}>
   <div className="card-info flex-col w-[232px] h-[208px] ease-in-out delay-100 hover:cursor-pointer hover:scale-105 transition-transform">
     <div className="grid place-items-center pb-5">
     <img
