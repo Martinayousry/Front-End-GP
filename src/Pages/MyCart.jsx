@@ -50,11 +50,12 @@ const MyCart = () => {
             pets.map((item) => (
               <Card
                 key={item.cartItemId}
-                id={item.animalId || item.petId}
+                id={item.petId || item.animalId}
                 title={item.name}
                 description={item.itemType}
                 gender={item.gender}
                 photoUrls={item.photoUrls}
+                type={item.petId ? "pet" : "animal"}
               />
             ))
           ) : (

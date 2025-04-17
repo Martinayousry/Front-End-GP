@@ -44,7 +44,7 @@ const MyPets = () => {
                 description={pet.description || "No description available."}
                 gender={pet.gender}
                 photoUrls={pet.photoUrls}
-                type='pet'
+                type="Pet"
               />
             ))
           ) : (

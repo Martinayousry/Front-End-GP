@@ -56,7 +56,7 @@ function App() {
         <Route path="clinic-details/:id" element={<ClinicDetails />} />
 
         <Route path="lost" element={<Lost />} />
-       
+
         <Route path="donation" element={<Donation />} />
         {/* <Route path="payment/:amount" element={<Payment />} />
         <Route path="code" element={<Code />} /> */}
@@ -72,7 +72,6 @@ function App() {
         <Route path="doctor-dashboard" element={<DoctorDashboard />} />
         <Route path="pet-profile" element={<PetProfile />} />
 
-
         <Route path="adoption" element={<AdoptionLayout />}>
           <Route
             path="animal-adopt"
@@ -84,8 +83,16 @@ function App() {
             element={<PetsForAdopt />}
             loader={adoptionLoaderPets}
           />
-          <Route index element={<Adoption />} loader={adoptionLoader} />
-          <Route path="adoption-form/:animalId" element={<AdoptionForm />} />
+          <Route path="adoption-form/:id" element={<AdoptionForm />} />
+
+          {/* <Route
+            path="adoption-form/:petId"
+            element={<AdoptionForm />}
+          />
+          <Route
+            path="/adoption-form/:animalId"
+            element={<AdoptionForm />}
+          /> */}
         </Route>
 
         <Route path="*" element={<NotFound />} />

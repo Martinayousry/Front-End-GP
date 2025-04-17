@@ -3,12 +3,22 @@ import "./AdoptionForm.css";
 import { IoMdArrowForward } from "react-icons/io";
 import ThankYou from "../../components/ThankYou";
 import { useAuth } from "../../Context/AuthContext";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const AdoptionForm = () => {
   const [showModal, setShowModal] = useState(false);
   const { token } = useAuth();
-  const { petId, animalId } = useParams();
+
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
+  if (!["pet", "animal"].includes(type)) {
+    return (
+      <div className="text-center py-10 text-lg text-red-500">
+        Invalid adoption type.
+      </div>
+    );
+  }
 
   const handleAdopt = async (e) => {
     e.preventDefault();
@@ -24,8 +34,8 @@ const AdoptionForm = () => {
     const ownedAnimalBefore = form.elements["ownedAnimalBefore"].value;
 
     const requestBody = {
-      petId: petId || null,
-      animalId: animalId || null,
+      petId: type === "pet" ? id : null,
+      animalId: type === "animal" ? id : null,
       anotherPet,
       hoursAnimalAlone,
       ownedAnimalBefore,

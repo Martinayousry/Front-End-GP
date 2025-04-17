@@ -24,16 +24,16 @@ export default function Navbar() {
         <div className="flex md:order-2 space-x-3">
           {user ? (
             <div className="relative">
-              <div className="flex flex-row justify-center items-center"> 
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-10 h-10 rounded-full bg-[#749260] text-white text-lg font-bold me-2"
-              >
-                {getFirstLetter(user.userName)}
-              </button>
-              <p>hello,{user.userName}</p>
+              <div className="flex flex-row justify-center items-center">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="w-10 h-10 rounded-full bg-[#749260] text-white text-lg font-bold me-2"
+                >
+                  {getFirstLetter(user.userName)}
+                </button>
+                <p>hello,{user.userName}</p>
               </div>
-              
+
               {isOpen && (
                 <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg w-40 z-50">
                   <span className="block px-4 py-2 text-gray-700">
@@ -65,7 +65,7 @@ export default function Navbar() {
                 Login
               </button>
               <button
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/doctor-signup")}
                 className="text-white bg-[#4b6b30] hover:bg-[#3b5825] rounded-lg text-sm px-4 py-2"
               >
                 Sign Up

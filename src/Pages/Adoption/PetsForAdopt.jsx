@@ -18,7 +18,7 @@ export default function PetsForAdopt() {
           Pets.map((pet) => (
             <Card
               key={pet.petId}
-              animalId={pet.petId}
+              id={pet.petId}
               title={pet.title}
               description={pet.description}
               gender={pet.gender}
