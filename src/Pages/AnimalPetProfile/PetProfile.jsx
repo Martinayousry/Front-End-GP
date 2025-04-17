@@ -7,14 +7,13 @@ const PetProfile = () => {
   const { isAuthenticated } = useAuth();
   const { id } = useParams();
   const [pet, setPet] = useState(null);
-  const [isFavorite, setIsFavorite] = useState(false); // Track favorite status
-  const [cartItemId, setCartItemId] = useState(null); // Store cart item ID
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [cartItemId, setCartItemId] = useState(null);
   const { token } = useAuth();
 
-  // Check if the pet is already in the favorites list
   useEffect(() => {
     const checkFavoriteStatus = async () => {
-      if (!token) return; // Don't proceed if there's no token
+      if (!token) return;
 
       try {
         const res = await fetch("/api/Cart/MyCart", {
@@ -33,7 +32,7 @@ const PetProfile = () => {
 
         if (favoriteItem) {
           setIsFavorite(true);
-          setCartItemId(favoriteItem.cartItemId); // Set cart item ID
+          setCartItemId(favoriteItem.cartItemId);
         } else {
           setIsFavorite(false);
           setCartItemId(null);
@@ -120,25 +119,34 @@ const PetProfile = () => {
       ]}
       showOwnerInfo={true}
       buttons={
-        <div className="flex">
-          <Link
-            to={`/adoption/adoption-form/${id}?type=pet`}
-            className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center"
-          >
-            Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
-          </Link>
-
-          <button
-            className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center"
-            onClick={handleToggleFavorite}
-          >
-            {isFavorite ? (
-              <i className="fa-solid fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
-            ) : (
-              <i className="fa-regular fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
-            )}
+        isAuthenticated ? (
+          <>
+            <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
+              <Link to={`/adoption/adoption-form/${id}?type=pet`}>
+                Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
+              </Link>
+            </button>
+            <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
+              <Link to={`/adoption/adoption-form/${id}`}>
+                marriage<i className="ms-2 fa-solid fa-dog"></i>
+              </Link>
+            </button>
+            <button
+              className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center"
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite ? (
+                <i className="fa-solid fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
+              ) : (
+                <i className="fa-regular fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
+              )}
+            </button>
+          </>
+        ) : (
+          <button className="bg-blue-500 w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4">
+            <Link to="/login">Login to Adopt</Link>
           </button>
-        </div>
+        )
       }
     />
   );

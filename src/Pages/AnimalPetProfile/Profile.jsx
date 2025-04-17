@@ -158,7 +158,7 @@ const ProfileComponent = ({
               </div>
             </div>
 
-            <div className="flex">
+            <div className="flex ">
               {buttons || (
                 <>
                   <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">

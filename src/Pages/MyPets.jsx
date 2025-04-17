@@ -39,12 +39,12 @@ const MyPets = () => {
             pets.map((pet) => (
               <Card
                 key={pet.petId}
-                animalId={pet.petId}
+                id={pet.petId}
                 title={pet.title}
                 description={pet.description || "No description available."}
                 gender={pet.gender}
                 photoUrls={pet.photoUrls}
-                type="Pet"
+                type="pet"
               />
             ))
           ) : (
