@@ -82,7 +82,7 @@ function App() {
             element={<PetsForAdopt />}
             loader={adoptionLoaderPets}
           />
-          <Route path="adoption-form" element={<AdoptionForm />} />
+          <Route path="adoption-form/:id" element={<AdoptionForm />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

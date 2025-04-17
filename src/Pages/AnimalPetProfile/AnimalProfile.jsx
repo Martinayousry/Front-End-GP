@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Profile from "./Profile";
 
-const AnimalProfile = () => (
+const AnimalProfile = () => {
+    const {id} = useParams();
+
   <Profile
     apiEndpoint="/api/Animals"
     requiresAuth={false}
@@ -18,15 +20,19 @@ const AnimalProfile = () => (
     tabs={["Description", "Habitat", "Conservation"]}
     buttons={
       <>
-        <button className="bg-orange-500 w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4">
-          <Link to="/wildlife-donate">Donate</Link>
-        </button>
-        <button className="bg-purple-500 w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4">
-          <Link to="/wildlife-volunteer">Volunteer</Link>
-        </button>
+        <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
+              <Link to={`/adoption/adoption-form/${id}`}>
+                Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
+              </Link>
+            </button>
+            <button className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center">
+              <Link to={"/adoption-form"}>
+                <i className="fa-regular fa-heart text-[#749260E5] hover:text-black"></i>
+              </Link>
+            </button>
       </>
     }
   />
-);
+  };
 
 export default AnimalProfile;
