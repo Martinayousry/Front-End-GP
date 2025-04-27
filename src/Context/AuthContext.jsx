@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
       setUser(res.data);
+      localStorage.setItem("userId", res.data.id); 
     } catch (error) {
       console.error("Failed to fetch user:", error);
       localStorage.removeItem("token");
@@ -36,12 +37,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (token) => {
     localStorage.setItem("token", token);
+
     setToken(token);
     await fetchUser();
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setToken(null); 
     setUser(null);
   };

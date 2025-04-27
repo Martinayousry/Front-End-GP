@@ -5,7 +5,6 @@ import { useAuth } from "../../Context/AuthContext";
 
 const AnimalProfile = () => {
   const { id } = useParams();
-  const [pet, setPet] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [cartItemId, setCartItemId] = useState(null);
   const { token } = useAuth();
@@ -103,7 +102,6 @@ const AnimalProfile = () => {
       apiEndpoint="/api/Animals"
       requiresAuth={false}
       titleKey="title"
-      onDataLoaded={setPet}
       detailsConfig={[
         { key: "foundDate", label: "Found Date" },
         {

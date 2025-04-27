@@ -18,7 +18,11 @@ export async function adoptionLoaderPets() {
       Authorization: `Bearer ${token}`,
     },
   });
+  const currentUserId = localStorage.getItem("userId");  // Or however you store the user ID
 
-  return res.data;
+  // Filter out pets that belong to the logged-in user
+  const availablePets = res.data.filter(pet => pet.userId !== currentUserId);
+
+  return availablePets;
 }
 

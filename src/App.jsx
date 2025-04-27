@@ -38,6 +38,7 @@ import DoctorSignup from "./Pages/Signup/SignupDoctors";
 import MyPets from "./Pages/MyPets";
 import PetsForAdopt from "./Pages/Adoption/PetsForAdopt";
 import MyCart from "./Pages/MyCart";
+import Chat from "./Pages/Chat"
 
 function App() {
   const router = createBrowserRouter(
@@ -112,6 +113,7 @@ function App() {
     <>
       <RouterProvider router={router} />
       <Toaster position="top-right" richColors closeButton />
+      {/* <Chat/> */}
     </>
   );
 }
