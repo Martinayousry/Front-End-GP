@@ -137,7 +137,7 @@
 // }
 import { useEffect, useState, useRef } from "react";
 import { useAuth } from "../Context/AuthContext"; // Assuming you have this
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Chat = () => {
   const { token, user } = useAuth(); // Make sure you have user info
@@ -146,6 +146,8 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const socketRef = useRef(null);
+  const { id } = useParams();
+
 
   // Load previous chats
   useEffect(() => {

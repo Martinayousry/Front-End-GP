@@ -27,6 +27,7 @@ const ProfileComponent = ({
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [error, setError] = useState(null);
 
+
   const tabClasses = (tab) =>
     `px-4 py-2 font-medium ${
       activeTab === tab ? "text-black border-b-2 border-black" : "text-gray-500"
@@ -71,6 +72,9 @@ const ProfileComponent = ({
     isAuthenticated,
     navigate,
   ]);
+
+ 
+
 
   if (error) {
     return <div className="text-center mt-20 text-red-500">{error}</div>;
@@ -145,6 +149,11 @@ const ProfileComponent = ({
                   <p className="text-gray-600">
                     Email: {profileData.owner.email}
                   </p>
+                  <button className="bg-[#749260E5] w-50 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
+                    <Link to={`/chat/${profileData.owner.id}`}>
+                      chat with owner  <i className="fa-solid fa-comments"></i>
+                    </Link>
+                  </button>
                 </div>
               )}
 

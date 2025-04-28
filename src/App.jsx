@@ -39,6 +39,11 @@ import MyPets from "./Pages/MyPets";
 import PetsForAdopt from "./Pages/Adoption/PetsForAdopt";
 import MyCart from "./Pages/MyCart";
 import Chat from "./Pages/Chat"
+import Sidenav from "./components/SidenavDoctor";
+import DoctorLayout from "./Layout/DoctorLayout";
+import DoctorProfile from "./Pages/DoctorProfile";
+import MyClinics from "./Pages/MyClinics";
+import MyAppointments from "./Pages/Appointments";
 
 function App() {
   const router = createBrowserRouter(
@@ -85,6 +90,7 @@ function App() {
             loader={adoptionLoaderPets}
           />
           <Route path="adoption-form/:id" element={<AdoptionForm />} />
+         
 
           {/* <Route
             path="adoption-form/:petId"
@@ -95,6 +101,7 @@ function App() {
             element={<AdoptionForm />}
           /> */}
         </Route>
+        <Route path="chat/:id" element={<Chat/>} />
 
         <Route path="*" element={<NotFound />} />
 
@@ -105,6 +112,15 @@ function App() {
           <Route path="doctors" element={<Doctors />} />
           <Route path="create-admin" element={<CreateAdmin />} />
         </Route>
+        <Route path="doctor" element={<DoctorLayout />}>
+          <Route path="profile" element={<DoctorProfile />} />
+          <Route path="appointments" element={<MyAppointments />} />
+          <Route path="clinics" element={<MyClinics/>} />
+          {/* you will build */}
+          <Route path="add-clinic" element={<AddClinic/>} />
+          <Route path="messages" element={<Chat />} />
+          {/* use your Chat.jsx here */}
+        </Route>
       </Route>
     )
   );
@@ -113,7 +129,6 @@ function App() {
     <>
       <RouterProvider router={router} />
       <Toaster position="top-right" richColors closeButton />
-      {/* <Chat/> */}
     </>
   );
 }
