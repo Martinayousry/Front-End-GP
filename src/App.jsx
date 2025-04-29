@@ -39,8 +39,8 @@ import MyPets from "./Pages/MyPets";
 import PetsForAdopt from "./Pages/Adoption/PetsForAdopt";
 import MyCart from "./Pages/MyCart";
 import Chat from "./Pages/Chat";
-import RecentChats from "./Pages/RecentChats/RecentChats"
-import ChatList from "./Pages/ChatList"
+import RecentChats from "./Pages/RecentChats/RecentChats";
+import ChatList from "./Pages/ChatList";
 import Sidenav from "./components/SidenavDoctor";
 import DoctorLayout from "./Layout/DoctorLayout";
 import DoctorProfile from "./Pages/DoctorProfile";
@@ -89,6 +89,9 @@ function App() {
             />
             <Route path="adoption-form/:id" element={<AdoptionForm />} />
           </Route>
+          <Route path="chat/:id" element={<Chat />} />
+          <Route path="RecentChats" element={<RecentChats />} />
+          <Route path="ChatList" element={<ChatList />} />
         </Route>
 
         {/* Protected Routes - Doctors only */}
@@ -99,9 +102,9 @@ function App() {
             <Route path="appointments" element={<MyAppointments />} />
             <Route path="clinics" element={<MyClinics />} />
             <Route path="add-clinic" element={<AddClinic />} />
-            <Route path="chat/:id" element={<Chat/>} />
-        <Route path="RecentChats" element={<RecentChats/>} />
-        <Route path="ChatList" element={<ChatList/>} />
+            <Route path="chat/:id" element={<Chat />} />
+            <Route path="RecentChats" element={<RecentChats />} />
+            <Route path="ChatList" element={<ChatList />} />
           </Route>
         </Route>
 
