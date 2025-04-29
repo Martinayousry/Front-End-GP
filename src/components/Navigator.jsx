@@ -57,6 +57,9 @@ export default function Navigator() {
         <li>
             <NavLink to={"/my-cart"}>My Cart</NavLink>
           </li>
+          <li>
+            <NavLink to={"/RecentChats"}>Recent Chats</NavLink>
+          </li>
       </ul>
     </div>
   );
