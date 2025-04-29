@@ -1,9 +1,11 @@
 // src/components/Sidenav/DoctorSidenav.jsx
+import { useAuth } from "@/Context/AuthContext";
 import React from "react";
 import { Link } from "react-router-dom";
- // Import your Sidenav CSS correctly
+// Import your Sidenav CSS correctly
 
 const DoctorSidenav = () => {
+    const {logout } = useAuth();
   return (
     <div className="side-nav">
       <div className="flex flex-row items-center justify-center gap-2 pb-10">
@@ -39,6 +41,11 @@ const DoctorSidenav = () => {
         <li>
           <Link to="/adoption/animal-adopt">
             Animals <i className="ms-2 fa-solid fa-dog"></i>
+          </Link>
+        </li>
+        <li>
+          <Link to="/login">
+            <button onClick={logout}>Logout</button>
           </Link>
         </li>
       </ul>

@@ -7,8 +7,20 @@ import ClinicDetails from "./ClinicDetails";
 import PetProfile from "./AnimalPetProfile/PetProfile";
 import Navigator from "../components/Navigator";
 import Footer from "../components/Footer";
+import { useAuth } from "@/Context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 export default function Home() {
+  const { user } = useAuth();
+
+  if (user?.roles?.includes("Doctor")) {
+    return <Navigate to="/doctor" />;
+  }
+
+  if (user?.roles?.includes("Admin")) {
+    return <Navigate to="/admin" />;
+  }
+
   return (
     <>
       <div className="bg-white">

@@ -38,89 +38,82 @@ import DoctorSignup from "./Pages/Signup/SignupDoctors";
 import MyPets from "./Pages/MyPets";
 import PetsForAdopt from "./Pages/Adoption/PetsForAdopt";
 import MyCart from "./Pages/MyCart";
-import Chat from "./Pages/Chat"
+import Chat from "./Pages/Chat";
 import Sidenav from "./components/SidenavDoctor";
 import DoctorLayout from "./Layout/DoctorLayout";
 import DoctorProfile from "./Pages/DoctorProfile";
 import MyClinics from "./Pages/MyClinics";
 import MyAppointments from "./Pages/Appointments";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
+        {/* Public Routes */}
         <Route index element={<Home />} />
-
         <Route path="/login" element={<Login />} />
-        <Route path="/doctor-signup" element={<DoctorSignup />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/add-clinic" element={<AddClinic />} />
+        <Route path="/doctor-signup" element={<DoctorSignup />} />
 
-        <Route path="clinics" element={<ClinicsLayout />}>
-          <Route index element={<Clinics />} />
+        {/* Protected Routes - Any logged-in user */}
+        <Route element={<PrivateRoute />}>
+          <Route path="add-pet-profile" element={<AddPetForm />} />
+          <Route path="my-pets" element={<MyPets />} />
+          <Route path="my-cart" element={<MyCart />} />
+          <Route path="chat/:id" element={<Chat />} />
+          <Route path="clinics" element={<ClinicsLayout />}>
+            <Route index element={<Clinics />} />
+          </Route>
+          <Route path="clinic-details/:id" element={<ClinicDetails />} />
+
+          <Route path="lost" element={<Lost />} />
+
+          <Route path="donation" element={<Donation />} />
+          <Route path="pet-profile/:id" element={<PetProfile />} />
+          <Route path="animal-profile/:id" element={<AnimalProfile />} />
+
+          <Route path="volunteering" element={<Volunteering />} />
+          <Route path="adoption" element={<AdoptionLayout />}>
+            <Route
+              path="animal-adopt"
+              element={<AnimalForAdopt />}
+              loader={adoptionLoaderAnimals}
+            />
+            <Route
+              path="pets-adopt"
+              element={<PetsForAdopt />}
+              loader={adoptionLoaderPets}
+            />
+            <Route path="adoption-form/:id" element={<AdoptionForm />} />
+          </Route>
         </Route>
-        <Route path="clinic-details/:id" element={<ClinicDetails />} />
 
-        <Route path="lost" element={<Lost />} />
-
-        <Route path="donation" element={<Donation />} />
-        {/* <Route path="payment/:amount" element={<Payment />} />
-        <Route path="code" element={<Code />} /> */}
-
-        <Route path="pet-profile/:id" element={<PetProfile />} />
-        <Route path="animal-profile/:id" element={<AnimalProfile />} />
-
-        <Route path="add-pet-profile" element={<AddPetForm />} />
-        <Route path="my-pets" element={<MyPets />} />
-        <Route path="my-cart" element={<MyCart />} />
-
-        <Route path="volunteering" element={<Volunteering />} />
-        <Route path="doctor-dashboard" element={<DoctorDashboard />} />
-        <Route path="pet-profile" element={<PetProfile />} />
-
-        <Route path="adoption" element={<AdoptionLayout />}>
-          <Route
-            path="animal-adopt"
-            element={<AnimalForAdopt />}
-            loader={adoptionLoaderAnimals}
-          />
-          <Route
-            path="pets-adopt"
-            element={<PetsForAdopt />}
-            loader={adoptionLoaderPets}
-          />
-          <Route path="adoption-form/:id" element={<AdoptionForm />} />
-         
-
-          {/* <Route
-            path="adoption-form/:petId"
-            element={<AdoptionForm />}
-          />
-          <Route
-            path="/adoption-form/:animalId"
-            element={<AdoptionForm />}
-          /> */}
+        {/* Protected Routes - Doctors only */}
+        <Route element={<PrivateRoute allowedRoles={["Doctor"]} />}>
+          <Route path="doctor-dashboard" element={<DoctorDashboard />} />
+          <Route path="doctor" element={<DoctorLayout />}>
+            <Route path="profile" element={<DoctorProfile />} />
+            <Route path="appointments" element={<MyAppointments />} />
+            <Route path="clinics" element={<MyClinics />} />
+            <Route path="add-clinic" element={<AddClinic />} />
+            <Route path="messages" element={<Chat />} />
+          </Route>
         </Route>
-        <Route path="chat/:id" element={<Chat/>} />
 
+        {/* Protected Routes - Admins only */}
+        <Route element={<PrivateRoute allowedRoles={["Admin"]} />}>
+          <Route path="admin" element={<AdminLayout />}>
+            <Route path="pets" element={<Volunteering />} />
+            <Route path="adoption-request" element={<AdoptionRequest />} />
+            <Route path="adoption-request/:id" element={<AdoptionRequest />} />
+            <Route path="doctors" element={<Doctors />} />
+            <Route path="create-admin" element={<CreateAdmin />} />
+          </Route>
+        </Route>
+
+        {/* Not Found */}
         <Route path="*" element={<NotFound />} />
-
-        <Route path="admin" element={<AdminLayout />}>
-          <Route path="pets" element={<Volunteering />} />
-          <Route path="adoption-request" element={<AdoptionRequest />} />
-          <Route path="adoption-request/:id" element={<AdoptionRequest />} />
-          <Route path="doctors" element={<Doctors />} />
-          <Route path="create-admin" element={<CreateAdmin />} />
-        </Route>
-        <Route path="doctor" element={<DoctorLayout />}>
-          <Route path="profile" element={<DoctorProfile />} />
-          <Route path="appointments" element={<MyAppointments />} />
-          <Route path="clinics" element={<MyClinics/>} />
-          {/* you will build */}
-          <Route path="add-clinic" element={<AddClinic/>} />
-          <Route path="messages" element={<Chat />} />
-          {/* use your Chat.jsx here */}
-        </Route>
       </Route>
     )
   );
