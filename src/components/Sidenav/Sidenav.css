@@ -1,0 +1,38 @@
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 100%;
+    background-color: #eff0f6;
+    color: #626262;
+    padding-top: 20px;
+  }
+  
+  .side-nav ul li {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .side-nav ul li a {
+    color: #626262;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .side-nav ul li a:hover {
+    background-color: #e3e9df;
+  }
+  .side-nav img {
+    width: 50px;
+    height: 50px;
+  }
+  .side-nav p {
+    font-weight: 500;
+    color: #749260;
+    font-size: x-large;
+    font-style: oblique;
+    font-family: "Qwigley";
+  }

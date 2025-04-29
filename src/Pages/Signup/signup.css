@@ -1,0 +1,131 @@
+/* Full Page Setup */
+.signup {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 40px auto; /* Center in the page without using body styles */
+  }
+  
+  /* Combined Form and Image Unit */
+  /* .signup-unit {
+    display: flex;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden; 
+  } */
+  
+  /* Form Styling */
+  .signup-form {
+    width: 400px; /* Adjust form width */
+    padding: 30px;
+    text-align: center;
+    flex: 1;
+  }
+  
+  /* Image styles */
+  .signup-image {
+    width: 50%; /* Match the form width */
+    height: auto; /* Maintain aspect ratio */
+    /* Ensures the image covers the container without distortion */
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    border-radius: 40px;
+  }
+  
+  /* Input container */
+  .input-container {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  /* Input fields */
+  .signup .input-field {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  /* Radio buttons */
+  .radio-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 15px;
+  }
+  
+  .radio-container span {
+    margin-right: 10px; /* Add spacing between "Sign in as:" and the radio buttons */
+  }
+  
+  .radio-label {
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  
+  /* Buttons */
+  .signup .button {
+    width: 100%;
+    padding: 12px;
+    background-color: #749260;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .signup .button:hover {
+    background-color: #5a704e;
+  }
+  
+  /* Google button */
+  .signup .google-button {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    background: #fff;
+    font-size: 14px;
+    transition: background 0.3s ease;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .signup .google-button:hover {
+    background: #f5f5f5;
+  }
+  
+  /* Register text */
+  .register-text {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .register-link {
+    color: #749260;
+    text-decoration: none;
+  }
+  
+  .register-link:hover {
+    text-decoration: underline;
+  }
