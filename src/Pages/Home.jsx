@@ -8,7 +8,8 @@ import PetProfile from "./AnimalPetProfile/PetProfile";
 import Navigator from "../components/Navigator";
 import Footer from "../components/Footer";
 import { useAuth } from "@/Context/AuthContext";
-import { Navigate } from "react-router-dom";
+import { Navigate,Link } from "react-router-dom";
+import { Stethoscope, Image as ImageIcon } from "lucide-react";
 
 export default function Home() {
   const { user } = useAuth();
@@ -60,29 +61,63 @@ export default function Home() {
         </div>
 
         {/* Vision Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16 mt-25">
+
+        <div id="features-section" className="scroll-mt-32 pt-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-20 mt-28 px-6">
+          {/* Image Section */}
           <div className="relative">
             <img
-              src="/images/experience.png"
+              src="/public/images/close-up-veterinarian-taking-care-dog_23-2149100195.avif"
               alt="Dog main"
-              className="rounded-lg w-full"
+              className="rounded-2xl w-full shadow-lg"
             />
           </div>
+
+          {/* Text & Features */}
           <div>
-            <p className="text-green-700 text-md uppercase font-semibold ">
-              Shelter's Vision
+            <p className="text-green-700 text-md uppercase font-semibold mb-2">
+              Our Features
             </p>
-            <p className="text-5xl font-bold mb-4 tex">
-              Innovative Care for Every Animal
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Tools to Understand & Care for Your Pet
+            </h2>
+            <p className="text-gray-700 mb-6 text-lg">
+              Discover our innovative tools built for pet owners. Use the{" "}
+              <strong>Symptom Selector</strong> to detect signs of illness, and
+              explore the <strong>Disease Photo</strong> feature to recognize
+              visual symptoms, including <strong>(skin diseases)</strong> .
             </p>
-            <p className="text-gray-700 mb-4 p-5">
-              Our Shelter enables you to request animals and uses smart
-              technology to detect if an animal is pregnant, ensuring optimal
-              care and efficient matching.
-            </p>
-            <button className="bg-green-700 text-white px-4 py-2 rounded shadow hover:bg-green-800">
-              Read More
-            </button>
+
+            {/* Features List */}
+            <div className="mb-6 space-y-4">
+              <div className="flex items-center gap-4">
+                <Stethoscope className="text-green-700 w-6 h-6" />
+                <span className="font-medium text-gray-800">
+                  Symptom Selector
+                </span>
+              </div>
+              <div className="flex items-center gap-4">
+                <ImageIcon className="text-green-700 w-6 h-6" />
+                <span className="font-medium text-gray-800">
+                  Upload a Photo to Detect Skin Disease
+                </span>
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex gap-4">
+              <Link
+                to="/symptom-selector"
+                className="bg-green-700 text-white px-5 py-2 rounded-lg shadow hover:bg-green-800 transition"
+              >
+                Try Symptom Selector
+              </Link>
+              <Link
+                to="/disease-photo"
+                className="border border-green-700 text-green-700 px-5 py-2 rounded-lg shadow hover:bg-green-100 transition"
+              >
+                Upload a Photo to Detect Skin Disease
+              </Link>
+            </div>
           </div>
         </div>
 

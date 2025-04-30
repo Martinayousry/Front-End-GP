@@ -84,10 +84,10 @@ const SymptomSelector = () => {
   };
 
   return (
-    <div className="container">
-      <div className="box">
+    <div className="container-fluid cont mt-15 ">
+      <div className="box ">
     {/* Add this header section */}
-    <div className="header-section">
+    <div className="header-section ">
       <h1>Dog Health Predictor</h1>
       <p className="header-description">
         Select the symptoms your dog is experiencing from the list below. 

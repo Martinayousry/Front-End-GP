@@ -47,6 +47,8 @@ import DoctorProfile from "./Pages/DoctorProfile";
 import MyClinics from "./Pages/MyClinics";
 import MyAppointments from "./Pages/Appointments";
 import PrivateRoute from "./components/PrivateRoute";
+import SymptomSelector from "./Pages/Machine/SymptomSelector";
+import SkinDiseasePrediction from "./Pages/Machine/DiseasePhoto";
 
 function App() {
   const router = createBrowserRouter(
@@ -118,6 +120,8 @@ function App() {
             <Route path="create-admin" element={<CreateAdmin />} />
           </Route>
         </Route>
+        <Route path="symptom-selector" element={<SymptomSelector />} />
+        <Route path="disease-photo" element={<SkinDiseasePrediction />} />
 
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />

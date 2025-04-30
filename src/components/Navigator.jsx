@@ -1,6 +1,6 @@
-import { NavLink  } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
-import "./Navigator.css";;
+import "./Navigator.css";
 
 export default function Navigator() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -8,9 +8,6 @@ export default function Navigator() {
   return (
     <div>
       <ul className="text-[#959595] grid grid-cols-3 md:grid-cols-4 lg:flex lg:justify-around p-5 relative">
-        <li>
-          <NavLink to="/lost">Lost&Found</NavLink>
-        </li>
         <li>
           <NavLink to="/clinics">Clinics</NavLink>
         </li>
@@ -24,42 +21,48 @@ export default function Navigator() {
             onClick={() => setIsDropdownOpen((prev) => !prev)}
             className="hover:text-black"
           >
-           Adoption ▼
+            Adoption ▼
           </button>
 
           {isDropdownOpen && (
             <ul className="absolute bg-white border rounded shadow-md top-full left-0 w-40 mt-2 z-10 text-black">
               <li className="hover:bg-gray-100">
-                <NavLink to="/adoption/animal-adopt" className="block px-4 py-2">Animals</NavLink>
+                <NavLink
+                  to="/adoption/animal-adopt"
+                  className="block px-4 py-2"
+                >
+                  Animals
+                </NavLink>
               </li>
               <li className="hover:bg-gray-100">
-                <NavLink to="/adoption/pets-adopt" className="block px-4 py-2">Pets</NavLink>
+                <NavLink to="/adoption/pets-adopt" className="block px-4 py-2">
+                  Pets
+                </NavLink>
               </li>
             </ul>
           )}
+        </li>
+        <li>
+          <a href="#features-section" className="hover:text-black">
+            Features
+          </a>
         </li>
 
         <li>
           <NavLink to="/add-pet-profile">Add pet profile</NavLink>
         </li>
-        <li>
-          <NavLink to="/pet-marriage">Pet marriage</NavLink>
-        </li>
-        <li>
+        {/* <li>
           <NavLink to="/donation">Donations</NavLink>
-        </li>
-        <li>
-          <NavLink to="/lost">Online consultant</NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink to="/my-pets">My Pets</NavLink>
         </li>
         <li>
-            <NavLink to={"/my-cart"}>My Cart</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/RecentChats"}>Recent Chats</NavLink>
-          </li>
+          <NavLink to={"/my-cart"}>My Cart</NavLink>
+        </li>
+        <li>
+          <NavLink to={"/RecentChats"}>Recent Chats</NavLink>
+        </li>
       </ul>
     </div>
   );
