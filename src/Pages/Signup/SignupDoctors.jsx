@@ -112,7 +112,7 @@ const DoctorSignup = () => {
 
         {/* Sign up as a Doctor */}
         <p className="doctor-text">
-          <a href="/signup" className="doctor-link">
+          <a href="/doctor-signup" className="doctor-link">
             Sign up as a Doctor
           </a>
         </p>

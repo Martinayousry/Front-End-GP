@@ -11,7 +11,7 @@ const Login = () => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
-  const {login}=useAuth();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       const res = await axios.post("/api/Auth/login", { username, password });
-      await login(res.data.token); 
+      await login(res.data.token);
       navigate("/");
     } catch (err) {
       const errorMsg =
@@ -66,9 +66,7 @@ const Login = () => {
               {showPassword ? "🙈" : "👁"}
             </span>
           </div>
-          {passwordError && (
-            <p className="error-text">{passwordError}</p>
-          )}
+          {passwordError && <p className="error-text">{passwordError}</p>}
 
           {/* Login Button */}
           <button type="submit" className="login-btn">
@@ -82,12 +80,12 @@ const Login = () => {
 
         <div className="register-text">
           Don’t have an account?{" "}
-          <a href="#" className="register-link">
+          <a href="/signup" className="register-link">
             Register
           </a>
         </div>
         <div className="asdoctor-signup">
-          <a href="#">Sign up as a Doctor</a>
+          <a href="/doctor-signup">Sign up as a Doctor</a>
         </div>
       </div>
 

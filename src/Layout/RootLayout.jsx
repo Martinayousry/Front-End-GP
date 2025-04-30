@@ -1,17 +1,30 @@
 import { useAuth } from "@/Context/AuthContext";
 import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function RootLayout() {
   const { user } = useAuth();
+  const location = useLocation();
 
-  const hideNavbar = user?.roles?.includes("Doctor") || user?.roles?.includes("Admin");
+  const hidePaths = [
+    "/login",
+    "/signup",
+    "/doctor-signup",
+    "/admin",
+    "/doctor",
+  ];
+
+  const shouldHideLayout = hidePaths.some((path) =>
+    location.pathname.startsWith(path)
+  );
 
   return (
-      <div>
-      {!hideNavbar && <Navbar />} {/* Only show Navbar if not doctor or admin */}
+    <div>
+      {!shouldHideLayout && <Navbar />}
       <Outlet />
+      {!shouldHideLayout && <Footer />}
     </div>
   );
 }

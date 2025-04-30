@@ -55,8 +55,8 @@ function App() {
         {/* Public Routes */}
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/doctor-signup" element={<DoctorSignup />} />
+        <Route path="/doctor-signup" element={<Signup />} />
+        <Route path="/signup" element={<DoctorSignup />} />
 
         {/* Protected Routes - Any logged-in user */}
         <Route element={<PrivateRoute />}>

@@ -1,74 +1,82 @@
 import React from "react";
-import "./Footer.css";
-import * as Icons from "react-icons/md";
-import { FaFacebookF } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
+import {
+  MdOutlineLocationOn,
+  MdOutlineLocalPhone,
+  MdOutlineMail,
+} from "react-icons/md";
+import { FaFacebookF, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="bg-[#3c5033ed] text-white px-6 md:px-24 py-10">
       <div>
-        <p className="font-bold text-lg">
+        <p className="font-bold text-lg text-center md:text-left">
           Society for the Protection of Animal Rights Egypt (SPARE)
         </p>
-        <div className="inline-flex">
-          <img src="./image.png" alt="" className="" />
-          <div className="px-20 py-7">
-            <p className="font-bold text-lg">Site Map</p>
-            <div className="flex flex-row gap-15 py-7">
-              <div className="flex flex-col gap-5">
-                <span>Home</span> <span>Service</span> <span>Lost & Found</span>{" "}
+        <div className="flex flex-col md:flex-row md:gap-12 mt-8">
+          <img
+            src="/images/map.png"
+            alt="map"
+            className="w-full md:w-[490px] h-auto mb-8 md:mb-0"
+          />
+          <div className="flex-1">
+            <p className="font-bold text-lg mb-4">Site Map</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-sm">
+              <div className="flex flex-col gap-2">
+                <span>Home</span>
+                <span>Service</span>
+                <span>Lost & Found</span>
                 <span>Clinics</span>
               </div>
-              <div className="flex flex-col gap-5">
-                <span>Pets for adoption</span> <span>Volunteering</span>{" "}
-                <span>Add pet profile</span> <span>Pet marriage</span>
+              <div className="flex flex-col gap-2">
+                <span>Pets for adoption</span>
+                <span>Volunteering</span>
+                <span>Add pet profile</span>
+                <span>Pet marriage</span>
               </div>
-              <div className="flex flex-col gap-5">
-                <span>Donations</span> <span>Online consultant</span>{" "}
-                <span>Help</span> <span>Contact Us</span>
+              <div className="flex flex-col gap-2">
+                <span>Donations</span>
+                <span>Online consultant</span>
+                <span>Help</span>
+                <span>Contact Us</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="border-b-2 pb-7 ">
+
+        <div className="border-b-2 border-white pb-7">
           <div className="relative inline-block p-4">
-            <Icons.MdOutlineLocationOn
-              size={30}
-              className="absolute top-5 left-0 "
-            />
-            <span className="inline-flex relative  pl-7 pr-30">
-              Society for the Protection of Animal Rights in Egypt (SPARE){" "}
+            <MdOutlineLocationOn size={30} className="absolute top-5 left-0" />
+            <span className="inline-flex relative pl-8 pr-8">
+              Society for the Protection of Animal Rights in Egypt (SPARE)
               <br />
               Zawyet Abou Mosalam Rd., Shoubramant, Sakkara, Giza, <br />
               beside Shoubramant Preparatory School for Girls.
             </span>
-          </div>{" "}
+          </div>
           <br />
           <div className="relative inline-block p-4">
-            <Icons.MdOutlineLocalPhone
-              size={30}
-              className="absolute top-4 left-0 "
-            />
-            <span className="inline-flex relative  pl-7 pr-30">
+            <MdOutlineLocalPhone size={30} className="absolute top-4 left-0" />
+            <span className="inline-flex relative pl-8 pr-8">
               377 09055 (202+)
             </span>
-          </div>{" "}
+          </div>
           <br />
           <div className="relative inline-block p-4">
-            <Icons.MdOutlineMail size={30} className="absolute top-4 left-0 " />
-            <span className="inline-flex relative  pl-7 pr-30 ">
+            <MdOutlineMail size={30} className="absolute top-4 left-0" />
+            <span className="inline-flex relative pl-8 pr-8">
               animal.protection.eg@gmail.com
             </span>
           </div>
         </div>
-        <div className="flex flex-row justify-between py-7">
-          <div className="flex flex-row  gap-4">
-            <FaFacebookF /> <FaLinkedin />
+
+        <div className="flex flex-col md:flex-row justify-between items-center py-7 gap-6">
+          <div className="flex flex-row gap-4">
+            <FaFacebookF />
+            <FaLinkedin />
             <FaYoutube />
           </div>
-          <div className="flex flex-row justify-between gap-5">
+          <div className="flex flex-row gap-5">
             <span>Publish</span>
             <span>privacy</span>
             <span>Terms</span>

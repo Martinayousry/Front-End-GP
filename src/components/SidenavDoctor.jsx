@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 // Import your Sidenav CSS correctly
 
 const DoctorSidenav = () => {
-    const {logout } = useAuth();
+  const { logout } = useAuth();
   return (
     <div className="side-nav">
       <div className="flex flex-row items-center justify-center gap-2 pb-10">
-        <img src="/pet.png" alt="Pets logo" className="" />
+        <img src="/images/feet.png" alt="Pets logo" className="" />
         <p>The Pets</p>
       </div>
       <ul>

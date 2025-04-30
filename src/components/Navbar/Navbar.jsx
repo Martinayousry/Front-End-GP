@@ -65,7 +65,7 @@ export default function Navbar() {
                 Login
               </button>
               <button
-                onClick={() => navigate("/doctor-signup")}
+                onClick={() => navigate("/signup")}
                 className="text-white bg-[#4b6b30] hover:bg-[#3b5825] rounded-lg text-sm px-4 py-2"
               >
                 Sign Up
