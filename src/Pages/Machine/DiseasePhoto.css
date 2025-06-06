@@ -338,3 +338,13 @@
     color: #c72525;
     border: 1px solid #ffd6d6;
   }
+
+
+
+  
+html {
+  scroll-behavior: smooth;
+}
+#features {
+  scroll-margin-top: 10px;
+}

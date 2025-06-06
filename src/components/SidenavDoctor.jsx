@@ -34,7 +34,7 @@ const DoctorSidenav = () => {
           </Link>
         </li>
         <li>
-          <Link to="/doctor/messages">
+          <Link to="/RecentChats">
             Messages <i className="fa-solid fa-comments"></i>
           </Link>
         </li>

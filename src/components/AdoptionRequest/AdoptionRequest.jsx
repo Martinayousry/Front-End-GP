@@ -15,9 +15,9 @@ const AdoptionRequest = () => {
       const { data } = await axios.get("/api/AdoptionRequests", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const pending = data.filter((req) => req.status === "Pending");
-      const acceptedReqs = data.filter((req) => req.status === "Accepted");
-      const rejectedReqs = data.filter((req) => req.status === "Rejected");
+      const pending = data.filter((req) => req.status === "Pending" && req.petId === null);
+      const acceptedReqs = data.filter((req) => req.status === "Accepted" && req.petId === null);
+      const rejectedReqs = data.filter((req) => req.status === "Rejected" && req.petId === null);
       setRequests(pending);
       setAccepted(acceptedReqs);
       setRejected(rejectedReqs);

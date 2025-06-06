@@ -31,12 +31,12 @@ export default function Navigator() {
                   to="/adoption/animal-adopt"
                   className="block px-4 py-2"
                 >
-                  Animals
+                 Adopt From Shelter
                 </NavLink>
               </li>
               <li className="hover:bg-gray-100">
                 <NavLink to="/adoption/pets-adopt" className="block px-4 py-2">
-                  Pets
+                  Adopt From Users
                 </NavLink>
               </li>
             </ul>
@@ -62,6 +62,11 @@ export default function Navigator() {
         </li>
         <li>
           <NavLink to={"/RecentChats"}>Recent Chats</NavLink>
+        </li> <li>
+          <NavLink to={"/PetSitter"}>Pet Sitter</NavLink>
+        </li>
+        <li>
+          <NavLink to={"/post"}>Losts Pets</NavLink>
         </li>
       </ul>
     </div>

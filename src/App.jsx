@@ -11,6 +11,7 @@ import Donation from "./Pages/Donation/Donation";
 import Home from "./Pages/Home";
 
 import ClinicDetails from "./Pages/ClinicDetails";
+import ClinicDetailsDr from "./Pages/ClinicDetailsDr";
 import Lost from "./Pages/Lost/Lost";
 import Volunteering from "./Pages/Volunteering/Volunteering";
 import RootLayout from "./Layout/RootLayout";
@@ -38,7 +39,7 @@ import DoctorSignup from "./Pages/Signup/SignupDoctors";
 import MyPets from "./Pages/MyPets";
 import PetsForAdopt from "./Pages/Adoption/PetsForAdopt";
 import MyCart from "./Pages/MyCart";
-import Chat from "./Pages/Chat";
+import Chat from "./Pages/chat/Chat";
 import RecentChats from "./Pages/RecentChats/RecentChats";
 import ChatList from "./Pages/ChatList";
 import Sidenav from "./components/SidenavDoctor";
@@ -49,6 +50,8 @@ import MyAppointments from "./Pages/Appointments";
 import PrivateRoute from "./components/PrivateRoute";
 import SymptomSelector from "./Pages/Machine/SymptomSelector";
 import SkinDiseasePrediction from "./Pages/Machine/DiseasePhoto";
+import Post from "./components/Post/Post";
+import PetSitter from "./Pages/PetSitterForm/PetSitter";
 
 function App() {
   const router = createBrowserRouter(
@@ -59,6 +62,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/doctor-signup" element={<Signup />} />
         <Route path="/signup" element={<DoctorSignup />} />
+        
 
         {/* Protected Routes - Any logged-in user */}
         <Route element={<PrivateRoute />}>
@@ -70,6 +74,9 @@ function App() {
             <Route index element={<Clinics />} />
           </Route>
           <Route path="clinic-details/:id" element={<ClinicDetails />} />
+          <Route path="clinic-details-dr/:id" element={<ClinicDetailsDr/>} />
+          <Route path="/post" element={<Post />} />
+          <Route path="PetSitter" element={<PetSitter />} />
 
           <Route path="lost" element={<Lost />} />
 
@@ -118,6 +125,7 @@ function App() {
             <Route path="adoption-request/:id" element={<AdoptionRequest />} />
             <Route path="doctors" element={<Doctors />} />
             <Route path="create-admin" element={<CreateAdmin />} />
+        
           </Route>
         </Route>
         <Route path="symptom-selector" element={<SymptomSelector />} />

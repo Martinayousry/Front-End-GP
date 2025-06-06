@@ -1,0 +1,229 @@
+/* Main Layout */
+body {
+    margin-top: 20px;
+    background: #eee;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  .container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  /* Grid System */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+  }
+  
+  /* Card Styles */
+  .card {
+    background: #fff;
+    border-radius: 0.55rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+  }
+  
+  .card .header {
+    padding: 20px;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .card .header h2 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  /* Card Body */
+  .card .body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Image Container */
+  .img-post {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+    margin-bottom: 15px;
+    border-radius: 0.25rem;
+  }
+  
+  .img-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .img-post:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Post Content */
+  .post-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  
+  .post-meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    color: #666;
+  }
+  
+  .post-meta li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .post-meta i {
+    margin-right: 8px;
+    font-size: 1rem;
+  }
+  
+  /* Lost Info Section */
+  .lost-info {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .lost-info-item {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  
+  .lost-info-label {
+    font-weight: 600;
+    color: #749260;
+    min-width: 120px;
+  }
+  
+  /* Badges and Buttons */
+  .lost-badge {
+    display: inline-block;
+    background-color: #ffeeee;
+    color: #d9534f;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-left: 10px;
+    text-transform: uppercase;
+  }
+  
+  .btn-contact {
+    background-color: #749260;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    margin-top: auto;
+    align-self: center;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .btn-contact:hover {
+    background-color: #5a724d;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-contact i {
+    margin-right: 8px;
+  }
+  
+  /* Social Share */
+  .social_share {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .img-post:hover .social_share {
+    opacity: 1;
+  }
+  
+  .social-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    transition: all 0.3s;
+  }
+  
+  .social-btn:hover {
+    transform: scale(1.1);
+    background: #fff;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .posts-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .img-post {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .container-fluid {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+    
+    .card .header,
+    .card .body {
+      padding: 15px;
+    }
+    
+    .lost-info-label {
+      min-width: 100px;
+    }
+  }

@@ -18,7 +18,7 @@ export default function Chat() {
   useEffect(() => {
     if (token) {
       const newConnection = new HubConnectionBuilder()
-        .withUrl('http://localhost:5000/chatHub', {
+        .withUrl('/api/chatHub', {
           accessTokenFactory: () => token,
         })
         .withAutomaticReconnect()
@@ -73,7 +73,7 @@ export default function Chat() {
       const fetchMessages = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/chat/messages?receiverId=${receiverId}`,
+            `/api/chat/messages?receiverId=${receiverId}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

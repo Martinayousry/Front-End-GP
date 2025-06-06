@@ -3,3 +3,12 @@
 @plugin "daisyui";
 
 @plugin "tailwindcss-animate";
+
+
+
+html {
+    scroll-behavior: smooth;
+  }
+  #features {
+    scroll-margin-top: 10px;
+  }

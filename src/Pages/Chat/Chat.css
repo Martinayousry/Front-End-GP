@@ -16,3 +16,10 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #5a7249;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  #features {
+    scroll-margin-top: 10px;
+  }

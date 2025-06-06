@@ -8,6 +8,7 @@ const DoctorSignup = () => {
   const [username, setUsername] = useState(""); // State for username
   const [email, setEmail] = useState(""); // State for email
   const [password, setPassword] = useState(""); // State for password
+  const [phoneNumber, setPhoneNumber] = useState(""); // State for phone number
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
   const navigate = useNavigate(); // Hook for navigation
 
@@ -15,19 +16,20 @@ const DoctorSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic form validation
-    if (!username || !email || !password) {
-      setErrorMessage("All fields are required!");
-      return;
-    }
+
+   // Basic form validation
+if (!username || !email || !password || !phoneNumber) {
+  setErrorMessage("All fields are required!");
+  return;
+}
 
     // Prepare the data to send in the request
     const userData = {
       username: username,
       email: email,
       password: password,
+      phoneNumber: phoneNumber, // Add phone number to the request
     };
-
     try {
       // Send POST request to the backend API
       const response = await axios.post("/api/Auth/RegisterUser", userData);
@@ -77,6 +79,18 @@ const DoctorSignup = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
+          {/* Phone Number */}
+<div className="input-container">
+  <label>Phone Number</label>
+  <input
+    type="tel"
+    placeholder="Enter your phone number"
+    className="input-field"
+    value={phoneNumber}
+    onChange={(e) => setPhoneNumber(e.target.value)}
+  />
+</div>
 
           {/* Password Input */}
           <div className="input-container">
