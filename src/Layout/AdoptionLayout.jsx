@@ -1,12 +1,15 @@
-import HeroSlider from '../components/HeroSlider'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
+import HeroSlider from '../components/HeroSlider'
 
 export default function AdoptionLayout() {
+  const location = useLocation()
+  const isFormPage = location.pathname.includes('/adoption/adoption-form')
+
   return (
     <div>
-      <HeroSlider/>
-      <Outlet/>
+      {!isFormPage && <HeroSlider />}
+      <Outlet />
     </div>
   )
 }

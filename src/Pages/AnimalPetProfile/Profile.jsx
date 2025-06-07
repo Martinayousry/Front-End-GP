@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
+// import AdoptionRequests from "../AnimalPetProfile/AdoptionRequest";
+
 
 const ProfileComponent = ({
   apiEndpoint,
@@ -9,8 +11,10 @@ const ProfileComponent = ({
   titleKey = "title",
   imageKey = "photoUrls",
   detailsConfig,
+  customMarriageRequestContent = null,
+  customAdoptionRequestContent=null,
   defaultTab = "Description",
-  tabs = ["Description", "Reviews", "Support"],
+  
   servicesList = [
     "Free adoption consultation",
     "100% Safe Adoption Process",
@@ -18,6 +22,7 @@ const ProfileComponent = ({
   ],
   buttons,
   showOwnerInfo = false,
+  currentUser = null,
 }) => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,7 +31,6 @@ const ProfileComponent = ({
   const [selectedImage, setSelectedImage] = useState("");
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [error, setError] = useState(null);
-
 
   const tabClasses = (tab) =>
     `px-4 py-2 font-medium ${
@@ -38,7 +42,6 @@ const ProfileComponent = ({
       try {
         const headers = {};
 
-        // Add authorization header if required and user is authenticated
         if (requiresAuth && isAuthenticated) {
           headers.Authorization = `Bearer ${token}`;
         }
@@ -63,18 +66,7 @@ const ProfileComponent = ({
     };
 
     fetchData();
-  }, [
-    id,
-    apiEndpoint,
-    imageKey,
-    requiresAuth,
-    token,
-    isAuthenticated,
-    navigate,
-  ]);
-
- 
-
+  }, [id, apiEndpoint, imageKey, requiresAuth, token, isAuthenticated, navigate]);
 
   if (error) {
     return <div className="text-center mt-20 text-red-500">{error}</div>;
@@ -86,12 +78,18 @@ const ProfileComponent = ({
     );
   }
 
+  // Check if current user is the owner
+  const isOwner = currentUser && profileData.owner && currentUser.id === profileData.owner.id;
+  const tabs = isOwner
+  ? ["Description", "Marriage Request", "Adoption Request"]
+  : ["Description"];
+
   return (
     <div className="bg-white mt-12">
       <div className="w-full grid place-items-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 p-4 gap-6 w-full max-w-7xl">
           {/* Image Gallery Section */}
-          <div className="flex lg:flex-col items-center justify-center gap-4 p-6 sm:col-span-2 w-full ">
+          <div className="flex lg:flex-col items-center justify-center gap-4 p-6 sm:col-span-2 w-full">
             <div className="flex flex-col lg:flex-row items-center gap-4">
               {/* thumbnails */}
               <div className="flex flex-row lg:flex-col gap-4">
@@ -139,8 +137,8 @@ const ProfileComponent = ({
                 </div>
               ))}
 
-              {/* Owner information for pets */}
-              {showOwnerInfo && profileData.owner && (
+              {/* Owner information - only show if not owner */}
+              {showOwnerInfo && profileData.owner && !isOwner && (
                 <div className="mb-4">
                   <p className="text-gray-700 font-medium">Owner Information</p>
                   <p className="text-gray-600">
@@ -167,22 +165,25 @@ const ProfileComponent = ({
               </div>
             </div>
 
-            <div className="flex ">
-              {buttons || (
-                <>
-                  <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
-                    <Link to={"/adoption-form"}>
-                      Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
-                    </Link>
-                  </button>
-                  <button className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center">
-                    <Link to={"/adoption-form"}>
-                      <i className="fa-regular fa-heart text-[#749260E5] hover:text-black"></i>
-                    </Link>
-                  </button>
-                </>
-              )}
-            </div>
+            {/* Buttons - only show if not owner */}
+            {!isOwner && (
+              <div className="flex">
+                {buttons || (
+                  <>
+                    <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
+                      <Link to={"/adoption-form"}>
+                        Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
+                      </Link>
+                    </button>
+                    <button className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center">
+                      <Link to={"/adoption-form"}>
+                        <i className="fa-regular fa-heart text-[#749260E5] hover:text-black"></i>
+                      </Link>
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -215,9 +216,13 @@ const ProfileComponent = ({
               <p>{profileData.description || "No description available"}</p>
             </>
           )}
-          {activeTab === "Reviews" && <p>⭐ Reviews will go here...</p>}
-          {activeTab === "Support" && <p>💬 Support content goes here...</p>}
-          {/* Add other custom tab contents here */}
+         {isOwner && (
+  <>
+    {activeTab === "Marriage Request" && customMarriageRequestContent}
+    {activeTab === "Adoption Request" && customAdoptionRequestContent}
+  </>
+)}
+
         </div>
       </div>
     </div>

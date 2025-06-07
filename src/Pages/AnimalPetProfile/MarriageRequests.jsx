@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
 import { toast } from "sonner"; 
+import { Link } from "react-router-dom";
 
 const MarriageRequests = ({ petId }) => {
   const { token } = useAuth();
@@ -74,6 +75,12 @@ const MarriageRequests = ({ petId }) => {
             <div>
               <h3 className="font-bold">{request.senderPet.name}</h3>
               <p className="text-sm text-gray-600">Breed: {request.senderPet.breed}</p>
+              <Link
+  to={`/pet-profile/${request.senderPet.petId}`}
+  className=" hover:text-green-600 font-medium pt-3 inline-flex items-center"
+>
+  View Profile <i className="fa-solid fa-arrow-right ml-1"></i>
+</Link>
             </div>
           </div>
           <div className="flex gap-2">

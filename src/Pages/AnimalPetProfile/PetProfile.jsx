@@ -1,17 +1,17 @@
+import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import MarriagePopup from "./MarriagePopup";
 import MarriageRequests from "./MarriageRequests";
+import AdoptionRequests from "./AdoptionRequest";
 
 const PetProfile = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user, token } = useAuth();
   const { id } = useParams();
   const [pet, setPet] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [cartItemId, setCartItemId] = useState(null);
-  const { token } = useAuth();
   const [showMarriagePopup, setShowMarriagePopup] = useState(false);
 
   useEffect(() => {
@@ -103,8 +103,9 @@ const PetProfile = () => {
       console.error("Toggle favorite failed:", err);
       alert("Something went wrong. Please try again.");
     }
+    
   };
-  
+
 
   return (
     <>
@@ -122,7 +123,10 @@ const PetProfile = () => {
           },
           { key: "breed", label: "Breed", default: "Not specified" },
         ]}
-        showOwnerInfo={true}
+        showOwnerInfo={true} // Let ProfileComponent handle the visibility
+        currentUser={user} // Pass current user to ProfileComponent
+        customMarriageRequestContent={<MarriageRequests petId={id} />}
+        customAdoptionRequestContent={<AdoptionRequests petId={id}/>}
         buttons={
           isAuthenticated ? (
             <>
@@ -132,7 +136,6 @@ const PetProfile = () => {
                 </Link>
               </button>
 
-              {/* Marriage Button - OPEN POPUP */}
               <button
                 className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center"
                 onClick={() => setShowMarriagePopup(true)}
@@ -165,9 +168,7 @@ const PetProfile = () => {
           receiverPetId={id}
         />
       )}
-
-      {/* Marriage Requests */}
-      <MarriageRequests petId={id} />
+      
     </>
   );
 };

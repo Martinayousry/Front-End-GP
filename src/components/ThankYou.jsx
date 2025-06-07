@@ -11,13 +11,15 @@ const ThankYou = ({ show, onClose }) => {
         <button onClick={onClose} className="close-button">
           ×
         </button>
-        <div className=" checkmark flex justify-center">
+        <div className="checkmark flex justify-center text-green-600 text-5xl mb-4">
           <IoCheckmarkDoneCircleOutline />
         </div>
-        <p className="font-bold">Thank You for Your Generosity!</p>
-        <p className="text-gray-500">
-          Your donation helps us care for animals in need and give <br /> them a
-          chance at a better life. We're grateful for your generosity!
+        <p className="font-bold text-xl text-center mb-2">
+          Adoption Request Submitted!
+        </p>
+        <p className="text-gray-600 text-center">
+          Thank you for submitting your adoption request. <br />
+          Our team will review your application and get back to you shortly.
         </p>
       </div>
     </div>

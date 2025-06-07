@@ -66,7 +66,7 @@ export default function Home() {
           {/* Image Section */}
           <div className="relative">
             <img
-              src="/public/images/close-up-veterinarian-taking-care-dog_23-2149100195.avif"
+              src="/images/close-up-veterinarian-taking-care-dog_23-2149100195.avif"
               alt="Dog main"
               className="rounded-2xl w-full shadow-lg"
             />
