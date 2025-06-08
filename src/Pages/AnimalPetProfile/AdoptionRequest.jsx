@@ -3,26 +3,34 @@ import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
 import { toast } from "sonner";
 
-const AdoptionRequests = ({ petId }) => {
-  const { token } = useAuth();
+const AdoptionRequests = ({ ID }) => {
+  const { token, user } = useAuth(); // assuming `user` contains role info
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
     const fetchAdoptionRequests = async () => {
       try {
-        const res = await axios.get(`/api/AdoptionRequests/ByPet/${petId}`, {
+        const isAdmin = user?.roles?.includes("Admin"); // adjust as needed
+
+        const endpoint = isAdmin
+          ? `/api/AdoptionRequests/byAnimals/${ID}`
+          : `/api/AdoptionRequests/ByPet/${ID}`;
+
+        const res = await axios.get(endpoint, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+
         setRequests(res.data);
       } catch (error) {
         console.error("Failed to fetch adoption requests:", error);
+        toast.error("Failed to load requests.");
       }
     };
 
     fetchAdoptionRequests();
-  }, [petId, token]);
+  }, [ID, token, user]);
 
   const handleRespond = async (requestId, isAccept) => {
     try {
@@ -32,7 +40,7 @@ const AdoptionRequests = ({ petId }) => {
 
       await axios.patch(
         endpoint,
-        {}, // No body required
+        {}, // no body needed
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,20 +50,17 @@ const AdoptionRequests = ({ petId }) => {
 
       toast.success(`Request ${isAccept ? "accepted" : "rejected"} successfully!`);
 
-      // Remove the responded request from the list
+      // Remove the responded request
       setRequests((prev) => prev.filter((r) => r.adoptionRequestId !== requestId));
     } catch (error) {
-      console.error("Failed to respond to adoption request:", error);
+      console.error("Failed to respond to request:", error);
       toast.error("Action failed. Please try again.");
     }
-    
   };
 
   const pendingRequests = requests.filter((req) => req.status === "Pending");
 
   if (pendingRequests.length === 0) return null;
-
-  
 
   return (
     <div className="p-4 mt-8 bg-gray-100 rounded-xl shadow-md">

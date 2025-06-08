@@ -70,7 +70,7 @@ const AdoptionRequest = () => {
     const getFirstLetter = (name) => name?.charAt(0).toUpperCase() || "?";
 
     return (
-      <div className="requests mt-10">
+      <div className="requests mt-10 ">
         <h2 className="p-6 text-gray-800 font-semibold text-xl flex justify-between">
           {title}
           {title === "Request Adoption" && (
@@ -139,7 +139,7 @@ const AdoptionRequest = () => {
 
   return (
     <div className="adoptions">
-      <p className="font-bold text-2xl border-b-1 border-gray-400 pb-4">
+      <p className="font-bold text-2xl border-b-1 border-gray-400 pb-4 ps-20">
         Adoptions
       </p>
       {renderTable("Request Adoption", requests, {

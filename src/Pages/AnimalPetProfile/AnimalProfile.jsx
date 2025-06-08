@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Profile from "./Profile";
 import { useAuth } from "../../Context/AuthContext";
+import AdoptionRequests from "./AdoptionRequest";
+import MarriageRequests from "./MarriageRequests";
 
 const AnimalProfile = () => {
   const { id } = useParams();
   const [isFavorite, setIsFavorite] = useState(false);
   const [cartItemId, setCartItemId] = useState(null);
-  const { token } = useAuth();
+  const { token,user } = useAuth();
 
   useEffect(() => {
     const checkFavoriteStatus = async () => {
@@ -102,6 +104,8 @@ const AnimalProfile = () => {
       apiEndpoint="/api/Animals"
       requiresAuth={false}
       titleKey="title"
+      customAdoptionRequestContent={<AdoptionRequests ID={id}/>}
+      customMarriageRequestContent={<MarriageRequests petId={id}/>}
       detailsConfig={[
         { key: "foundDate", label: "Found Date" },
         {
@@ -113,24 +117,26 @@ const AnimalProfile = () => {
       ]}
       tabs={["Description", "Habitat", "Conservation"]}
       buttons={
-        <>
-          <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
-            <Link to={`/adoption/adoption-form/${id}?type=animal`}>
-              Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
-            </Link>
-          </button>
-
-          <button
-            className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center"
-            onClick={handleToggleFavorite}
-          >
-            {isFavorite ? (
-              <i className="fa-solid fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
-            ) : (
-              <i className="fa-regular fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
-            )}
-          </button>
-        </>
+        !user.roles.includes("Admin") && (
+          <>
+            <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
+              <Link to={`/adoption/adoption-form/${id}?type=animal`}>
+                Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
+              </Link>
+            </button>
+      
+            <button
+              className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center"
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite ? (
+                <i className="fa-solid fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
+              ) : (
+                <i className="fa-regular fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
+              )}
+            </button>
+          </>
+        )
       }
     />
   );

@@ -1,131 +1,112 @@
-/* Full Page Setup */
-.signup {
-    display: flex;
-    width: 80%;
-    max-width: 1000px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    margin: 40px auto; /* Center in the page without using body styles */
-  }
-  
-  /* Combined Form and Image Unit */
-  /* .signup-unit {
-    display: flex;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    overflow: hidden; 
-  } */
-  
-  /* Form Styling */
-  .signup-form {
-    width: 400px; /* Adjust form width */
-    padding: 30px;
-    text-align: center;
-    flex: 1;
-  }
-  
-  /* Image styles */
-  .signup-image {
-    width: 50%; /* Match the form width */
-    height: auto; /* Maintain aspect ratio */
-    /* Ensures the image covers the container without distortion */
-    display: flex;
-    flex: 1;
-    padding: 20px;
-    border-radius: 40px;
-  }
-  
-  /* Input container */
-  .input-container {
-    margin-bottom: 15px;
-    text-align: left;
-  }
-  
-  .input-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 14px;
-  }
-  
-  /* Input fields */
-  .signup .input-field {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-  }
-  
-  /* Radio buttons */
-  .radio-container {
-    display: flex;
-    align-items: center; /* Align items vertically */
-    margin-bottom: 15px;
-  }
-  
-  .radio-container span {
-    margin-right: 10px; /* Add spacing between "Sign in as:" and the radio buttons */
-  }
-  
-  .radio-label {
-    margin-right: 10px;
-    font-size: 14px;
-  }
-  
-  /* Buttons */
-  .signup .button {
-    width: 100%;
-    padding: 12px;
-    background-color: #749260;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .signup .button:hover {
-    background-color: #5a704e;
-  }
-  
-  /* Google button */
-  .signup .google-button {
-    width: 100%;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 15px;
-    background: #fff;
-    font-size: 14px;
-    transition: background 0.3s ease;
-    font-family: "Arial", sans-serif;
-  }
-  
-  .signup .google-button:hover {
-    background: #f5f5f5;
-  }
-  
-  /* Register text */
-  .register-text {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  .register-link {
-    color: #749260;
-    text-decoration: none;
-  }
-  
-  .register-link:hover {
-    text-decoration: underline;
-  }
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.form-section {
+  flex: 1;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.form-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.logo {
+  height: 30px;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+form label {
+  display: block;
+  margin: 1rem 0 0.25rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #749260;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.signup-text a {
+  color: #6b47dc;
+  text-decoration: none;
+}
+
+.illustration-section {
+  flex: 1;
+  background-color: #e9ddff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.illustration {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

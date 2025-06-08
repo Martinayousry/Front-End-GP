@@ -126,7 +126,7 @@ const PetProfile = () => {
         showOwnerInfo={true} // Let ProfileComponent handle the visibility
         currentUser={user} // Pass current user to ProfileComponent
         customMarriageRequestContent={<MarriageRequests petId={id} />}
-        customAdoptionRequestContent={<AdoptionRequests petId={id}/>}
+        customAdoptionRequestContent={<AdoptionRequests ID={id}/>}
         buttons={
           isAuthenticated ? (
             <>

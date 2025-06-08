@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
 import { useAuth } from "../../../src/Context/AuthContext";
+import "./Login.css";
 
 const Login = () => {
   const [username, setUserName] = useState("");
@@ -31,69 +31,85 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="login-form">
-        <h2>Welcome back!</h2>
-        <p>Login to access all your data</p>
+    <div className="login-page">
+      {/* Left Section: Form */}
+      <div className="form-section">
+        <div className="form-container">
+          <div className="flex flex-row">
+          <img src="/images/The pet.png" alt="TheCubeFactory" className="logo" />
+          <img src="/images/feet.png" alt="TheCubeFactory" className="logo ms-3" />
+          </div>
+      
+          <h2>Welcome back</h2>
+          <p>Please enter your details</p>
 
-        <form onSubmit={handleLogin}>
-          <label>username</label>
-          <input
-            type="text"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
-            required
-          />
-          {usernameError && (
-            <p className="error-textt text-red-500">{usernameError}</p>
-          )}
-
-          {/* Password Input */}
-          <label>Password</label>
-          <div className="password-input">
+          <form onSubmit={handleLogin}>
+            <label>Email address</label>
             <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
               required
             />
-            <span
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁"}
-            </span>
-          </div>
-          {passwordError && <p className="error-text">{passwordError}</p>}
+            {usernameError && (
+              <p className="error-text">{usernameError}</p>
+            )}
 
-          {/* Login Button */}
-          <button type="submit" className="login-btn">
-            Log In
-          </button>
-        </form>
+            <label>Password</label>
+            <div className="password-field">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <span
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}
+              </span>
+            </div>
+            {passwordError && (
+              <p className="error-text">{passwordError}</p>
+            )}
 
-        {/* Divider */}
-        <div className="divider">Continue with</div>
-        <button className="button google-button">Login with Google</button>
+            <div className="options">
+              <label>
+                <input type="checkbox" /> Remember for 30 days
+              </label>
+              <a href="/forgot-password" className="link">
+                Forgot password
+              </a>
+            </div>
 
-        <div className="register-text">
-          Don’t have an account?{" "}
-          <a href="/signup" className="register-link">
-            Register
-          </a>
-        </div>
-        <div className="asdoctor-signup">
-          <a href="/doctor-signup">Sign up as a Doctor</a>
+            <button type="submit" className="login-btn">
+              Sign in
+            </button>
+
+            <button type="button" className="google-btn">
+              <img src="/google-icon.svg" alt="Google" />
+              Sign in with Google
+            </button>
+          </form>
+
+          <p className="signup-text">
+  Don’t have an account? <a href="/signup">Sign up</a> or{" "}
+  <a href="/doctor-signup">Sign up as a Doctor</a>
+</p>
         </div>
       </div>
 
-      <img
-        src={"/images/login.jpeg"}
-        alt="Login Page Illustration"
-        className="login-image"
-      />
+      {/* Right Section: Illustration */}
+      <div className="illustration-section">
+        <img
+          src="/images/login.jpeg"
+          alt="Login Illustration"
+          className="illustration"
+        />
+      </div>
     </div>
   );
 };

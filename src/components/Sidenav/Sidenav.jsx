@@ -13,7 +13,7 @@ const Sidenav = () => {
       </div>
       <ul>
         <li>
-          <Link to="/admin/pets">Pets </Link>
+          <Link to="/admin">Animals</Link>
         </li>
         <li>
           <Link to="/admin/adoption-request">Adoption Requests</Link>

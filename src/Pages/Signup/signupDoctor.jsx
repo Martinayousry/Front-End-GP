@@ -1,67 +1,61 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Signup.css";
+import "./Signup.css"; // Reuse existing styling
 
-const Signup = () => {
+const DoctorSignup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [specialization, setSpecialization] = useState("");
+  const [number, setNumber] = useState("");
+  const [medicalId, setMedicalId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!username || !email || !password || !phoneNumber) {
+    if (!username || !email || !password || !number || !specialization || !medicalId) {
       setErrorMessage("All fields are required!");
       return;
     }
 
     try {
-      const response = await axios.post("/api/Auth/RegisterUser", {
+      const response = await axios.post("/api/Auth/RegisterDoctor", {
         username,
         email,
         password,
-        phoneNumber,
+        specialization,
+        number,
+        medicalId,
       });
-      console.log("Registration successful:", response.data);
+      console.log("Doctor registered:", response.data);
       navigate("/login");
     } catch (error) {
-      console.error("Error during registration:", error);
-      setErrorMessage(
-        error.response?.data?.message || "Registration failed."
-      );
+      console.error("Registration error:", error);
+      setErrorMessage(error.response?.data?.message || "Registration failed.");
     }
   };
 
   return (
     <div className="login-page">
-      {/* Left Section: Form */}
+      {/* Left: Form */}
       <div className="form-section">
         <div className="form-container">
           <div className="flex flex-row">
-            <img
-              src="/images/The pet.png"
-              alt="TheCubeFactory"
-              className="logo"
-            />
-            <img
-              src="/images/feet.png"
-              alt="TheCubeFactory"
-              className="logo ms-3"
-            />
+            <img src="/images/The pet.png" alt="Logo" className="logo" />
+            <img src="/images/feet.png" alt="Feet" className="logo ms-3" />
           </div>
 
-          <h2>Welcome!</h2>
-          <p>Sign up to access all features</p>
+          <h2>Welcome Doctor!</h2>
+          <p>Sign up to start managing your patients</p>
 
           <form onSubmit={handleSubmit}>
             <label>User Name</label>
             <input
               type="text"
-              placeholder="Enter your username"
+              placeholder="Enter your full name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -70,7 +64,7 @@ const Signup = () => {
             <label>Email Address</label>
             <input
               type="email"
-              placeholder="Enter your email address"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -80,8 +74,8 @@ const Signup = () => {
             <input
               type="tel"
               placeholder="Enter your phone number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
               required
             />
 
@@ -106,10 +100,28 @@ const Signup = () => {
               </span>
             </div>
 
+            <label>Specialization</label>
+            <input
+              type="text"
+              placeholder="e.g. Cardiology"
+              value={specialization}
+              onChange={(e) => setSpecialization(e.target.value)}
+              required
+            />
+
+            <label>Medical ID</label>
+            <input
+              type="text"
+              placeholder="Enter your Medical ID"
+              value={medicalId}
+              onChange={(e) => setMedicalId(e.target.value)}
+              required
+            />
+
             {errorMessage && <p className="error-text">{errorMessage}</p>}
 
             <button type="submit" className="login-btn">
-              Sign up
+              Sign Up
             </button>
 
             <button type="button" className="google-btn">
@@ -124,11 +136,11 @@ const Signup = () => {
         </div>
       </div>
 
-      {/* Right Section: Illustration */}
+      {/* Right: Illustration */}
       <div className="illustration-section">
         <img
-          src="/images/login.jpeg"
-          alt="Signup Illustration"
+          src="/images/veterinarians-strip3.jpg"
+          alt="Doctor Sign Up"
           className="illustration"
         />
       </div>
@@ -136,4 +148,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default DoctorSignup;

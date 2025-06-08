@@ -14,7 +14,6 @@ const ProfileComponent = ({
   customMarriageRequestContent = null,
   customAdoptionRequestContent=null,
   defaultTab = "Description",
-  
   servicesList = [
     "Free adoption consultation",
     "100% Safe Adoption Process",
@@ -26,7 +25,7 @@ const ProfileComponent = ({
 }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { token, isAuthenticated } = useAuth();
+  const { token, isAuthenticated , user} = useAuth();
   const [profileData, setProfileData] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [activeTab, setActiveTab] = useState(defaultTab);
@@ -80,7 +79,8 @@ const ProfileComponent = ({
 
   // Check if current user is the owner
   const isOwner = currentUser && profileData.owner && currentUser.id === profileData.owner.id;
-  const tabs = isOwner
+  const isAdmin = user?.roles?.includes("Admin");
+  const tabs = (isOwner || isAdmin)
   ? ["Description", "Marriage Request", "Adoption Request"]
   : ["Description"];
 
@@ -168,20 +168,7 @@ const ProfileComponent = ({
             {/* Buttons - only show if not owner */}
             {!isOwner && (
               <div className="flex">
-                {buttons || (
-                  <>
-                    <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
-                      <Link to={"/adoption-form"}>
-                        Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
-                      </Link>
-                    </button>
-                    <button className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center">
-                      <Link to={"/adoption-form"}>
-                        <i className="fa-regular fa-heart text-[#749260E5] hover:text-black"></i>
-                      </Link>
-                    </button>
-                  </>
-                )}
+                {buttons}
               </div>
             )}
           </div>
@@ -216,7 +203,7 @@ const ProfileComponent = ({
               <p>{profileData.description || "No description available"}</p>
             </>
           )}
-         {isOwner && (
+         {(isOwner || isAdmin) && (
   <>
     {activeTab === "Marriage Request" && customMarriageRequestContent}
     {activeTab === "Adoption Request" && customAdoptionRequestContent}

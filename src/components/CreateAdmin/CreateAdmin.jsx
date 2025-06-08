@@ -44,7 +44,7 @@ const CreateAdmin = () => {
   };
 
   return (
-    <div className="create-admin mt-15">
+    <div className="create-admin">
       <p className="title font-bold text-2xl border-b-1 border-gray-400 pb-4">
         Create New Admin
       </p>
