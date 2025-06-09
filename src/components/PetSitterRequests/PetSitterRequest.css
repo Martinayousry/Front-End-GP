@@ -1,0 +1,161 @@
+/* Main container */
+.pet-sitter-requests {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 85%;
+  padding: 30px 50px;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+/* Title styling */
+.pet-sitter-requests p {
+  color: #749260;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* Table container */
+.requests-container {
+  height: auto;
+  max-height: 500px;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  margin: 30px 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+/* Table header */
+.requests-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Table header cells */
+.requests-table thead th {
+  position: sticky;
+  top: 0;
+  padding: 16px 12px;
+  background-color: #749260;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: none;
+}
+
+/* Table body cells */
+.requests-table tbody td {
+  padding: 16px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+/* Align columns and rows properly */
+.requests-table th,
+.requests-table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* First column alignment fix */
+.requests-table td:first-child,
+.requests-table th:first-child {
+  padding-left: 20px;
+}
+
+/* Last column alignment fix */
+.requests-table td:last-child,
+.requests-table th:last-child {
+  padding-right: 20px;
+}
+
+/* Row hover effect */
+.requests-table tbody tr:hover {
+  background-color: #f3f4f6;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-accepted {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Action buttons */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  margin: 0 4px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.accept-btn {
+  color: #10b981;
+}
+
+.accept-btn:hover {
+  background-color: #d1fae5;
+}
+
+.reject-btn {
+  color: #ef4444;
+}
+
+.reject-btn:hover {
+  background-color: #fee2e2;
+}
+
+/* Scrollbar styling */
+.requests-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.requests-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.requests-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.requests-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

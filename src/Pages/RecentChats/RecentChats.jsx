@@ -19,7 +19,7 @@ useEffect(() => {
     const fetchChats = async () => {
       try {
         const response = await axios.get(
-          'api/Chat/PreviousChats',
+          '/api/Chat/PreviousChats',
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -41,7 +41,8 @@ useEffect(() => {
   useEffect(() => {
     if (token) {
       const newConnection = new HubConnectionBuilder()
-        .withUrl('/api/chatHub', {
+        .withUrl('https://localhost:7090/chatHub', {
+        // .withUrl('https://localhost:5000/chatHub', {
           accessTokenFactory: () => token,
         })
         .withAutomaticReconnect()

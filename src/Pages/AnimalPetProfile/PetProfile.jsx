@@ -130,6 +130,7 @@ const PetProfile = () => {
         buttons={
           isAuthenticated ? (
             <>
+            
               <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
                 <Link to={`/adoption/adoption-form/${id}?type=pet`}>
                   Adopt Me <i className="ms-2 fa-solid fa-dog"></i>

@@ -29,36 +29,60 @@ export default function Home() {
           <div className="flex justify-center pt-15">
             <HeroSlider />
           </div>
-          <Navigator />
+          {/* <Navigator /> */}
         </div>
       </div>
       <div className="w-full px-4 py-8 max-w-7xl mx-auto">
         {/* Top Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              title: "Request and Care",
-              text: "Easily request a pet and use our smart technology to check if a dog is pregnant, ensuring the best care for all animals.",
-            },
-            {
-              title: "Smart Adoption",
-              text: "Request animals directly and utilize our advanced system to determine if an animal is pregnant, helping us provide tailored care.",
-            },
-            {
-              title: "Innovative Pet Care",
-              text: "Request your new pet and benefit from our smart technology that can detect pregnancy in dogs, enhancing our care and adoption process.",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="h-60 border border-gray-400 p-6 rounded-xl text-center shadow-sm hover:shadow-[#4d653e]  transition-all"
-            >
-              <div className="w-12 h-12 bg-[#749260] rounded-full mx-auto mb-4" />
-              <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-              <p className="text-[#666666] text-sm">{item.text}</p>
-            </div>
-          ))}
-        </div>
+        <div className="text-center mb-12 mt-20">
+  <p className="text-2xl font-bold mb-2">What You Can Do</p>
+  <p className="text-gray-600 text-sm">Explore our core features designed for pets and pet lovers</p>
+</div>
+
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-25">
+  {[
+    {
+      title: "Find Vet Clinics And Book Appointments",
+      image: "/images/vet-clinic.jpeg",
+      desc: "Search and connect with trusted veterinary clinics near you.",
+    },
+    {
+      title: "Add & Manage Pets",
+      image: "/images/pet-profile.jpeg",
+      desc: "Create detailed profiles for your pets, including medical history.",
+    },
+    {
+      title: "Chat with Owners and Doctors",
+      image: "/images/Chat.jpeg",
+      desc: "Chat with doctors or fellow pet owners for advice and support.",
+    },
+    {
+      title: "Adopt & Pet Marriage",
+      image: "/images/premium_photo-1694819488591-a43907d1c5cc.jpeg",
+      desc: "Request adoption or propose a marriage request between pets.",
+    },
+    {
+      title: "Report Lost Pets",
+      image: "/images/lost1.jpg",
+      desc: "Post lost pet alerts to quickly spread the word and get help.",
+    },
+    {
+      title: "Pet Sitting Request",
+      image: "/images/Petsitter.jpeg",
+      desc: "Request pet sitters from our animal shelter team for vacations or emergencies.",
+    },
+    
+  ].map((service, idx) => (
+    <div key={idx} className="rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all">
+      <img src={service.image} alt={service.title} className="w-full h-44 object-cover" />
+      <div className="p-4">
+        <h3 className="font-semibold text-lg text-green-800 mb-1">{service.title}</h3>
+        <p className="text-gray-600 text-sm">{service.desc}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
 
         {/* Vision Section */}
 
@@ -122,7 +146,7 @@ export default function Home() {
         </div>
 
         {/* Core Services */}
-        <div className="text-center mb-12 mt-20">
+        {/* <div className="text-center mb-12 mt-20">
           <p className="text-2xl font-bold mb-2">Our Core Services</p>
           <p className="text-gray-600 text-sm">
             Providing Comprehensive Support for Pets and Their Families
@@ -164,7 +188,7 @@ export default function Home() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   );

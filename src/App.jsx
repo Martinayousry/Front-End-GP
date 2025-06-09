@@ -53,6 +53,9 @@ import SkinDiseasePrediction from "./Pages/Machine/DiseasePhoto";
 import Post from "./components/Post/Post";
 import PetSitter from "./Pages/PetSitterForm/PetSitter";
 import AddAnimal from "./Pages/AddAnimal";
+import PetSitterRequests from "./components/PetSitterRequests/PetSitterRequest";
+import ClinicRequests from "./components/ClinicRequests/ClinicRequests";
+
 
 function App() {
   const router = createBrowserRouter(
@@ -126,6 +129,9 @@ function App() {
               loader={adoptionLoaderAnimals}
             />
             <Route path="adoption-request" element={<AdoptionRequest />} />
+            <Route path="PetSitterRequests" element={<PetSitterRequests />} />
+            <Route path="ClinicRequests" element={<ClinicRequests />} />
+
             <Route path="adoption-request/:id" element={<AdoptionRequest />} />
             <Route path="doctors" element={<Doctors />} />
             <Route path="create-admin" element={<CreateAdmin />} />

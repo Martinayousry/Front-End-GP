@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { FaInfoCircle, FaHeading, FaBirthdayCake, FaCalendarAlt, FaVenusMars, FaNotesMedical, FaCamera } from "react-icons/fa";
+import { FaInfoCircle, FaHeading, FaBirthdayCake, FaCalendarAlt, FaVenusMars, FaNotesMedical, FaCamera, FaHeart, FaHome } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import bgImage from "../../src/assets/adoptt.jpg"; // Use your background image here
+import bgImage from "../../src/assets/adoptt.jpg";
 import { useAuth } from "../Context/AuthContext";
 
 export default function AddAnimal() {
   const [showSubmitting, setShowSubmitting] = useState(false);
+const [marriageStatus, setMarriageStatus] = useState(0);
+const [adoptionStatus, setAdoptionStatus] = useState(0);
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -24,6 +26,8 @@ export default function AddAnimal() {
     formData.append("foundDate", form.foundDate.value);
     formData.append("gender", form.gender.value);
     formData.append("healthIssues", form.healthIssues.value);
+    formData.append("Marriage", marriageStatus);
+    formData.append("Adoption", adoptionStatus);
 
     // Append multiple photos
     const photos = form.photos.files;
@@ -44,8 +48,10 @@ export default function AddAnimal() {
 
       toast.success("Animal added successfully!");
       form.reset();
+      setMarriageStatus(false);
+      setAdoptionStatus(false);
       setTimeout(() => {
-        navigate("/admin");  // Redirect to admin default page
+        navigate("/admin");
       }, 1500);
     } catch (error) {
       console.error(error);
@@ -53,6 +59,9 @@ export default function AddAnimal() {
       setShowSubmitting(false);
     }
   };
+  const handleCheckboxChange = (setter) => (e) => {
+  setter(e.target.checked ? 1 : 0);
+};
 
   return (
     <div
@@ -163,6 +172,39 @@ export default function AddAnimal() {
             ></textarea>
           </div>
 
+          <div className="flex flex-wrap gap-6">
+            <div className="flex items-center">
+              <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={marriageStatus === 1}
+onChange={handleCheckboxChange(setMarriageStatus)}
+                  className="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500"
+                />
+                <span className="ml-2 font-medium flex items-center">
+                  <FaHeart className="mr-2 text-green-600" />
+                  Marriage Status
+                </span>
+              </label>
+            </div>
+
+            <div className="flex items-center">
+              <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={adoptionStatus === 1}
+onChange={handleCheckboxChange(setAdoptionStatus)}
+                  className="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500"
+                />
+                <span className="ml-2 font-medium flex items-center">
+                  <FaHome className="mr-2 text-green-600" />
+                  Available for Adoption
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {/* Photos input remains the same */}
           <div>
             <label htmlFor="photos" className="block font-medium mb-1">
               <FaCamera className="inline-block mr-2 text-green-600" />
@@ -178,6 +220,7 @@ export default function AddAnimal() {
             />
           </div>
 
+          {/* Submit button remains the same */}
           <div className="text-center mt-8">
             <motion.button
               whileHover={{ scale: 1.05 }}

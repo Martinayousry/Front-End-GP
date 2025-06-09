@@ -15,13 +15,17 @@ const Sidenav = () => {
         <li>
           <Link to="/admin">Animals</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/admin/adoption-request">Adoption Requests</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/admin/doctors">Doctors</Link>
         </li>
         <li>
+          <li>
+          <Link to="/admin/PetSitterRequests">Pet Sitter Requests</Link>
+        </li>
+        <li></li>
           <Link to="/admin/create-admin">Create New Admin</Link>
         </li>
         <li>

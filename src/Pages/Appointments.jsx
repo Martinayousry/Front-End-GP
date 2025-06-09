@@ -159,49 +159,92 @@ export default function MyAppointments() {
         <div className="text-center text-gray-500">Loading appointments...</div>
       )}
 
-      {!loading.appointments && selectedClinic && (
-        <div className="space-y-4">
-          {filteredAppointments.length === 0 ? (
-            <div className="text-center text-gray-500 py-8">
-              {selectedDate ? "No appointments found for selected date" : "No appointments found for this clinic"}
-            </div>
-          ) : (
-            filteredAppointments.map((appointment) => (
-              <div
-                key={appointment.appointmentId}
-                className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
-              >
-                <div className="flex-1 mb-3 sm:mb-0">
-                  <div className="font-medium text-[#2d3e2f]">
-                   Owner Name : {appointment.user.userName} 
-                  </div>
-                  <div className="font-medium text-[#2d3e2f]">
-                   Pet Name : {appointment.petName}
-                  </div>
-                  <div className="font-medium text-[#2d3e2f]">
-                    Notes :{appointment.patientNotes} 
-                  </div>
-                  <div className="text-sm text-gray-600">{appointment.reasonForVisit || "General Checkup"}</div>
-                </div>
-                
-                <div className="flex-1 text-sm text-gray-500">
-                  {appointment.formattedDate} at {appointment.timeRange}
-                </div>
-                
-                <div className="mt-2 sm:mt-0">
-                  <span className={`text-white text-xs py-1 px-3 rounded-full ${
-                    appointment.status === "Confirmed" ? "bg-[#4CAF50]" :
-                    appointment.status === "Pending" ? "bg-[#FF9800]" :
-                    "bg-[#F44336]"
-                  }`}>
-                    {appointment.status || "Scheduled"}
-                  </span>
-                </div>
+     {!loading.appointments && selectedClinic && (
+  <div className="space-y-4">
+    {filteredAppointments.length === 0 ? (
+      <div className="text-center text-gray-500 py-8">
+        {selectedDate ? "No appointments found for selected date" : "No appointments found for this clinic"}
+      </div>
+    ) : (
+      filteredAppointments.map((appointment) => (
+        <div
+          key={appointment.appointmentId}
+          className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Owner Information */}
+            <div className="space-y-3">
+              <h4 className="font-semibold text-lg text-[#2d3e2f] border-b pb-2">Owner Information</h4>
+              <div>
+                <span className="text-sm text-gray-500">Name:</span>
+                <p className="font-medium">{appointment.user.userName}</p>
               </div>
-            ))
-          )}
+              <div>
+                <span className="text-sm text-gray-500">Phone:</span>
+                <p className="font-medium">
+                  {appointment.user.phoneNumber || 'Not provided'}
+                </p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">Email:</span>
+                <p className="font-medium">{appointment.user.email}</p>
+              </div>
+            </div>
+
+            {/* Pet Information */}
+            <div className="space-y-3">
+              <h4 className="font-semibold text-lg text-[#2d3e2f] border-b pb-2">Pet Information</h4>
+              <div>
+                <span className="text-sm text-gray-500">Name:</span>
+                <p className="font-medium">{appointment.petName}</p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">Type:</span>
+                <p className="font-medium capitalize">{appointment.petType}</p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">Breed:</span>
+                <p className="font-medium capitalize">{appointment.breed}</p>
+              </div>
+            </div>
+
+            {/* Appointment Details */}
+            <div className="space-y-3">
+              <h4 className="font-semibold text-lg text-[#2d3e2f] border-b pb-2">Appointment Details</h4>
+              <div>
+                <span className="text-sm text-gray-500">Date & Time:</span>
+                <p className="font-medium">
+                  {appointment.formattedDate} at {appointment.timeRange}
+                </p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">Reason:</span>
+                <p className="font-medium">{appointment.reasonForVisit}</p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-500">Notes:</span>
+                <p className="font-medium">
+                  {appointment.patientNotes || 'No notes provided'}
+                </p>
+              </div>
+              <div className="mt-2">
+                <span className={`text-white text-xs py-1 px-3 rounded-full ${
+                  appointment.status === "Confirmed" ? "bg-[#4CAF50]" :
+                  appointment.status === "Pending" ? "bg-[#FF9800]" :
+                  "bg-[#F44336]"
+                }`}>
+                  {appointment.status || "Scheduled"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+       
         </div>
-      )}
+      ))
+    )}
+  </div>
+)}
     </div>
   );
 }

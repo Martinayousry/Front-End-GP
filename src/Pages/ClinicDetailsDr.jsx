@@ -75,7 +75,6 @@ export default function ClinicDetailsDr() {
         },
       });
 
-      // Refresh slots
       const res = await axios.get(`/api/Slot/clinic/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -107,7 +106,6 @@ export default function ClinicDetailsDr() {
         },
       });
 
-      // Refresh slots
       const res = await axios.get(`/api/Slot/clinic/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -133,7 +131,6 @@ export default function ClinicDetailsDr() {
           },
         });
 
-        // Refresh slots
         const res = await axios.get(`/api/Slot/clinic/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -151,7 +148,6 @@ export default function ClinicDetailsDr() {
   const formatTimeDisplay = (timeString) => {
     if (!timeString) return "";
 
-    // Check if timeString is already in HH:MM format
     if (/^\d{2}:\d{2}$/.test(timeString)) {
       const [hours, minutes] = timeString.split(':');
       const hourNum = parseInt(hours, 10);
@@ -173,183 +169,258 @@ export default function ClinicDetailsDr() {
   };
 
   return (
-    <div className="bg-white mt-15">
-      <div className="w-full p-1 grid place-items-center">
-        <div className="w-[85%] grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 rounded-2xl bg-gray-100">
-          <div className="lg:col-span-2 p-8 text-gray-700">
-            <p className="font-medium text-xl text-black">Details</p>
-            <h1 className="pt-3 text-3xl font-semibold">{clinic?.name}</h1>
+    <div className="bg-white min-h-screen pt-20 pb-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header with Back Button */}
+        <div className="flex items-center justify-between mb-8">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center text-[#749260] hover:text-[#5c7b4e] transition-colors"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Clinics
+          </button>
+          <h1 className="text-3xl font-bold text-gray-900">{clinic?.name}</h1>
+          <div className="w-10"></div> {/* Spacer for alignment */}
+        </div>
 
-            {/* Doctor Details */}
-            <div className="pt-6">
-              <p className="text-lg font-medium text-black">Doctor: {clinic?.doctor?.userName}</p>
-            </div>
-
-            {/* Address */}
-            <div className="pt-3">
-              <p className="text-lg font-medium text-black">Address: {clinic?.address}</p>
-
-              {clinic?.locationUrl && (
-                <div className="pt-6">
-                  <iframe
-                    src={clinic.locationUrl}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full h-[300px] border-0 rounded-xl"
-                  ></iframe>
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Clinic Details */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Clinic Info Card */}
+            <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+              <div className="p-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Clinic Information</h2>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#749260]">Doctor</h3>
+                    <p className="text-gray-700">{clinic?.doctor?.userName}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#749260]">Address</h3>
+                    <p className="text-gray-700">{clinic?.address}</p>
+                  </div>
+                  
+                  {clinic?.locationUrl && (
+                    <div className="mt-4">
+                      <iframe
+                        src={clinic.locationUrl}
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full h-64 rounded-lg border border-gray-200"
+                      ></iframe>
+                    </div>
+                  )}
+                  
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#749260]">Contact</h3>
+                    <p className="text-gray-700">{clinic?.number}</p>
+                    <p className="text-gray-700">{clinic?.cLinicEmail}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#749260]">About</h3>
+                    <p className="text-gray-700">{clinic?.details}</p>
+                  </div>
                 </div>
-              )}
-            </div>
-
-            {/* Clinic Contact Info */}
-            <div className="pt-3">
-              <p className="text-lg font-medium text-black">Phone: {clinic?.number}</p>
-            </div>
-
-            <div className="pt-3">
-              <p className="text-lg font-medium text-black">Email: {clinic?.cLinicEmail}</p>
-            </div>
-
-            {/* Clinic Details */}
-            <div className="pt-6">
-              <p className="text-lg font-medium text-black">Details: {clinic?.details}</p>
+              </div>
             </div>
 
             {/* Slots Section */}
-            <div className="pt-6">
-              <div className="flex justify-between items-center mb-4">
-                <p className="text-lg font-medium text-black">Available Slots:</p>
-                <button 
-                  onClick={() => setShowSlotModal(true)}
-                  className="bg-[#749260] text-white py-1 px-4 rounded hover:bg-[#5c7b4e] text-sm"
-                >
-                  Add Slot
-                </button>
+            <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-800">Available Slots</h2>
+                  <button 
+                    onClick={() => setShowSlotModal(true)}
+                    className="flex items-center bg-[#749260] hover:bg-[#5c7b4e] text-white py-2 px-4 rounded-lg transition-colors"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Add Slot
+                  </button>
+                </div>
+                
+                {slots.length > 0 ? (
+                  <div className="space-y-3">
+                    {slots.map(slot => (
+                      <div key={slot.slotId} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-10 h-10 rounded-full bg-[#749260] flex items-center justify-center text-white">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                          <div>
+                            <span className="font-medium text-gray-800">{formatTimeDisplay(slot.startTime)} - {formatTimeDisplay(slot.endTime)}</span>
+                          </div>
+                        </div>
+                        <div className="flex space-x-2">
+                          <button 
+                            onClick={() => openEditModal(slot)}
+                            className="flex items-center text-white bg-blue-500 hover:bg-blue-600 py-1 px-3 rounded-lg transition-colors"
+                          >
+                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            Edit
+                          </button>
+                          <button 
+                            onClick={() => handleDeleteSlot(slot.slotId)}
+                            className="flex items-center text-white bg-red-500 hover:bg-red-600 py-1 px-3 rounded-lg transition-colors"
+                          >
+                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    <h3 className="mt-2 text-lg font-medium text-gray-900">No slots available</h3>
+                    <p className="mt-1 text-gray-500">Add a new slot to get started.</p>
+                    <div className="mt-6">
+                      <button
+                        onClick={() => setShowSlotModal(true)}
+                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#749260] hover:bg-[#5c7b4e] focus:outline-none"
+                      >
+                        <svg className="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        New Slot
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
-              
-              {slots.length > 0 ? (
-                <div className="space-y-2">
-                  {slots.map(slot => (
-                    <div key={slot.slotId} className="flex justify-between items-center p-3 bg-white rounded shadow">
-                      <div>
-                        <span className="font-medium">{formatTimeDisplay(slot.startTime)}</span> - <span className="font-medium">{formatTimeDisplay(slot.endTime)}</span>
-                      </div>
-                      <div className="space-x-2">
-                        <button 
-                          onClick={() => openEditModal(slot)}
-                          className="bg-blue-500 text-white py-1 px-3 rounded text-sm hover:bg-blue-600"
-                        >
-                          Edit
-                        </button>
-                        <button 
-                          onClick={() => handleDeleteSlot(slot.slotId)}
-                          className="bg-red-500 text-white py-1 px-3 rounded text-sm hover:bg-red-600"
-                        >
-                          Delete
-                        </button>
-                      </div>
+            </div>
+          </div>
+
+          {/* Right Column - Clinic Info */}
+          <div className="space-y-6">
+            {/* Clinic Hours Card */}
+            <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-gray-800 mb-4">Clinic Hours</h2>
+                <div className="space-y-3">
+                  {[
+                    { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM" },
+                    { day: "Saturday", hours: "10:00 AM - 4:00 PM" },
+                    { day: "Sunday", hours: "Closed" }
+                  ].map((item, index) => (
+                    <div key={index} className="flex justify-between">
+                      <span className="text-gray-700">{item.day}</span>
+                      <span className="font-medium text-gray-800">{item.hours}</span>
                     </div>
                   ))}
                 </div>
-              ) : (
-                <p className="text-gray-500">No slots available. Add a new slot.</p>
-              )}
+              </div>
             </div>
-          </div>
 
-          {/* Clinic Info Section Without Card */}
-          <div className="lg:col-span-1 p-8">
-            <div className="bg-[#f1f5f8] p-4 rounded-xl shadow-md">
-              <h2 className="text-2xl font-semibold text-[#2d3e2f] mb-4">Clinic Info</h2>
-              <p className="text-lg font-medium text-black">Opening Hours:</p>
-              <p className="text-lg text-gray-700">9:00 AM - 6:00 PM (Mon - Fri)</p>
+            {/* Services Card */}
+            <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-gray-800 mb-4">Services</h2>
+                <ul className="space-y-2">
+                  {[
+                    "General Checkups",
+                    "Vaccinations",
+                    "Dental Care",
+                    "Surgical Procedures",
+                    "Emergency Care",
+                    "Pet Grooming"
+                  ].map((service, index) => (
+                    <li key={index} className="flex items-start">
+                      <svg className="flex-shrink-0 h-5 w-5 text-[#749260] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-gray-700">{service}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-              <p className="text-lg font-medium text-black pt-4">Specializations:</p>
-              <ul className="list-disc pl-5 text-gray-700">
-                <li>General Medicine</li>
-                <li>Pediatrics</li>
-                <li>Orthopedics</li>
-                <li>Dental Care</li>
-              </ul>
-            </div>
-            <div className="pt-6 flex justify-center">
-              <button 
-                onClick={() => navigate(`/Chat/${clinic?.doctor?.id}`)}
-                className="bg-gray-300 text-gray-700 py-2 px-6 rounded-xl hover:bg-gray-400"
-              >
-                Contact Clinic
-              </button>
-            </div>
+            {/* Contact Button */}
+           
           </div>
         </div>
-
-        {/* Back Button */}
-        <button
-          onClick={() => navigate(-1)}
-          className="bg-[#749260E5] p-3 rounded-2xl text-white text-center mt-7 max-sm:w-[40%] max-md:w-[30%] lg:w-[20%] xl:w-[15%] ms-20 flex items-center justify-center"
-        >
-          <i className="fa-solid fa-arrow-left mr-2"></i>
-          Back
-        </button>
       </div>
 
       {/* Add Slot Modal */}
       {showSlotModal && (
-        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-[#749260]">Add New Slot</h2>
-              <button 
-                onClick={() => setShowSlotModal(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <i className="fa-solid fa-times text-xl"></i>
-              </button>
-            </div>
-
-            <form onSubmit={handleAddSlot}>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Start Time (HH:MM) *</label>
-                <input
-                  type="time"
-                  name="startTime"
-                  value={slotForm.startTime}
-                  onChange={handleSlotInputChange}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">End Time (HH:MM) *</label>
-                <input
-                  type="time"
-                  name="endTime"
-                  value={slotForm.endTime}
-                  onChange={handleSlotInputChange}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-
-              <div className="flex justify-end space-x-3">
-                <button
-                  type="button"
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold text-gray-800">Add New Slot</h2>
+                <button 
                   onClick={() => setShowSlotModal(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                  className="text-gray-400 hover:text-gray-500"
                 >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-[#749260] text-white rounded hover:bg-[#5c7b4e]"
-                >
-                  Add Slot
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
-            </form>
+
+              <form onSubmit={handleAddSlot}>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
+                    <input
+                      type="time"
+                      name="startTime"
+                      value={slotForm.startTime}
+                      onChange={handleSlotInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#749260] focus:border-[#749260]"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">End Time</label>
+                    <input
+                      type="time"
+                      name="endTime"
+                      value={slotForm.endTime}
+                      onChange={handleSlotInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#749260] focus:border-[#749260]"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6 flex justify-end space-x-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowSlotModal(false)}
+                    className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 text-white bg-[#749260] hover:bg-[#5c7b4e] rounded-md transition-colors"
+                  >
+                    Add Slot
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}
@@ -357,58 +428,64 @@ export default function ClinicDetailsDr() {
       {/* Edit Slot Modal */}
       {showEditModal && currentSlot && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-[#749260]">Edit Slot</h2>
-              <button 
-                onClick={() => setShowEditModal(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <i className="fa-solid fa-times text-xl"></i>
-              </button>
-            </div>
-
-            <form onSubmit={handleEditSlot}>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Start Time (HH:MM) *</label>
-                <input
-                  type="time"
-                  name="startTime"
-                  value={slotForm.startTime}
-                  onChange={handleSlotInputChange}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">End Time (HH:MM) *</label>
-                <input
-                  type="time"
-                  name="endTime"
-                  value={slotForm.endTime}
-                  onChange={handleSlotInputChange}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-
-              <div className="flex justify-end space-x-3">
-                <button
-                  type="button"
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold text-gray-800">Edit Slot</h2>
+                <button 
                   onClick={() => setShowEditModal(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                  className="text-gray-400 hover:text-gray-500"
                 >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-[#749260] text-white rounded hover:bg-[#5c7b4e]"
-                >
-                  Update Slot
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
-            </form>
+
+              <form onSubmit={handleEditSlot}>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
+                    <input
+                      type="time"
+                      name="startTime"
+                      value={slotForm.startTime}
+                      onChange={handleSlotInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#749260] focus:border-[#749260]"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">End Time</label>
+                    <input
+                      type="time"
+                      name="endTime"
+                      value={slotForm.endTime}
+                      onChange={handleSlotInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#749260] focus:border-[#749260]"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6 flex justify-end space-x-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowEditModal(false)}
+                    className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 text-white bg-[#749260] hover:bg-[#5c7b4e] rounded-md transition-colors"
+                  >
+                    Update Slot
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}
