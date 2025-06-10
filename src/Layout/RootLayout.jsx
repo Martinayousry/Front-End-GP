@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer";
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function RootLayout() {
   const { user } = useAuth();
@@ -20,11 +21,17 @@ export default function RootLayout() {
     location.pathname.startsWith(path)
   );
 
-  return (
-    <div>
-      {!shouldHideLayout && <Navbar />}
+ // RootLayout.jsx
+
+return (
+  <div className="app-container">
+    <ScrollToTop />
+    {!shouldHideLayout && <Navbar />}
+    <main className="flex-fill">
       <Outlet />
-      {!shouldHideLayout && <Footer />}
-    </div>
-  );
+    </main>
+    {!shouldHideLayout && <Footer />}
+  </div>
+);
+
 }

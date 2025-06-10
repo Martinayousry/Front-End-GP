@@ -127,40 +127,43 @@ const PetProfile = () => {
         currentUser={user} // Pass current user to ProfileComponent
         customMarriageRequestContent={<MarriageRequests petId={id} />}
         customAdoptionRequestContent={<AdoptionRequests ID={id}/>}
-        buttons={
-          isAuthenticated ? (
-            <>
-            
-              <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
-                <Link to={`/adoption/adoption-form/${id}?type=pet`}>
-                  Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
-                </Link>
-              </button>
-
-              <button
-                className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center"
-                onClick={() => setShowMarriagePopup(true)}
-              >
-                Marriage <i className="ms-2 fa-solid fa-dog"></i>
-              </button>
-
-              <button
-                className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center"
-                onClick={handleToggleFavorite}
-              >
-                {isFavorite ? (
-                  <i className="fa-solid fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
-                ) : (
-                  <i className="fa-regular fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
-                )}
-              </button>
-            </>
+               buttons={{
+          adoptionButton: isAuthenticated ? (
+            <button className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center">
+              <Link to={`/adoption/adoption-form/${id}?type=pet`}>
+                Adopt Me <i className="ms-2 fa-solid fa-dog"></i>
+              </Link>
+            </button>
           ) : (
             <button className="bg-blue-500 w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4">
               <Link to="/login">Login to Adopt</Link>
             </button>
+          ),
+          marriageButton: isAuthenticated ? (
+            <button
+              className="bg-[#749260E5] w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4 text-center"
+              onClick={() => setShowMarriagePopup(true)}
+            >
+              Marriage <i className="ms-2 fa-solid fa-dog"></i>
+            </button>
+          ) : (
+            <button className="bg-blue-500 w-40 p-3 rounded-xl mt-3 text-white me-3 mb-4">
+              <Link to="/login">Login for Marriage</Link>
+            </button>
+          ),
+          favoriteButton: isAuthenticated && (
+            <button
+              className="bg-[#ebf0e8e5] p-3 rounded-2xl mt-3 text-white me-3 mb-4 sm:w-[50%] md:w-[30%] w-[75%] text-center"
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite ? (
+                <i className="fa-solid fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
+              ) : (
+                <i className="fa-regular fa-heart text-[#749260E5] hover:text-[#4c5d3fe5]"></i>
+              )}
+            </button>
           )
-        }
+        }}
       />
 
       {showMarriagePopup && (

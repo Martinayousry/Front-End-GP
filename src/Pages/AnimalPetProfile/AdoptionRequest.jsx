@@ -10,7 +10,7 @@ const AdoptionRequests = ({ ID }) => {
   useEffect(() => {
     const fetchAdoptionRequests = async () => {
       try {
-        const isAdmin = user?.roles?.includes("Admin"); // adjust as needed
+        const isAdmin = user?.roles?.includes("Admin");
 
         const endpoint = isAdmin
           ? `/api/AdoptionRequests/byAnimals/${ID}`

@@ -1,0 +1,16 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ensures the main content grows and pushes footer down */
+.flex-fill {
+  flex: 1;
+}
+html {
+    scroll-behavior: smooth;
+  }
+  #features {
+    scroll-margin-top: 10px;
+  }

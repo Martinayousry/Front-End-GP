@@ -14,6 +14,7 @@ const ProfileComponent = ({
   customMarriageRequestContent = null,
   customAdoptionRequestContent=null,
   defaultTab = "Description",
+  
   servicesList = [
     "Free adoption consultation",
     "100% Safe Adoption Process",
@@ -80,9 +81,21 @@ const ProfileComponent = ({
   // Check if current user is the owner
   const isOwner = currentUser && profileData.owner && currentUser.id === profileData.owner.id;
   const isAdmin = user?.roles?.includes("Admin");
-  const tabs = (isOwner || isAdmin)
-  ? ["Description", "Marriage Request", "Adoption Request"]
-  : ["Description"];
+  // const tabs = (isOwner || isAdmin)? ["Description", "Marriage Request", "Adoption Request"]
+  // : ["Description"];
+
+  const tabs = [];
+if (isOwner || isAdmin) {
+  tabs.push("Description");
+  if (profileData.adoption === 1) {
+    tabs.push("Adoption Request");
+  }
+  if (profileData.marriage === 1) {
+    tabs.push("Marriage Request");
+  }
+} else {
+  tabs.push("Description");
+}
 
   return (
     <div className="bg-white mt-12">
@@ -166,11 +179,15 @@ const ProfileComponent = ({
             </div>
 
             {/* Buttons - only show if not owner */}
-            {!isOwner && (
-              <div className="flex">
-                {buttons}
-              </div>
-            )}
+     {!isOwner && (
+        <div className="flex">
+          {(profileData.adoption === 1 && !isAdmin) && buttons.adoptionButton}
+          {(profileData.marriage === 1&& !isAdmin) && buttons.marriageButton}
+          {(!isAdmin) && buttons.favoriteButton}
+        </div>
+      )}
+
+
           </div>
         </div>
       </div>
