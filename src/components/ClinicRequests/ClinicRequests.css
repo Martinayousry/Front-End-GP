@@ -1,5 +1,5 @@
 /* Main container */
-.pet-sitter-requests {
+.clinic-requests {
   position: absolute;
   top: 0;
   right: 0;
@@ -10,7 +10,7 @@
 }
 
 /* Title styling */
-.pet-sitter-requests p {
+.clinic-requests p {
   color: #749260;
   margin-bottom: 20px;
   font-size: 28px;
@@ -20,7 +20,7 @@
 }
 
 /* Table container */
-.requests-container {
+.clinic-requests-container {
   height: auto;
   max-height: 500px;
   overflow-y: auto;
@@ -31,15 +31,15 @@
   border: 1px solid #e5e7eb;
 }
 
-/* Table header */
-.requests-table {
+/* Table styling */
+.clinic-requests-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
 
-/* Table header cells */
-.requests-table thead th {
+/* Table header */
+.clinic-requests-table thead th {
   position: sticky;
   top: 0;
   padding: 16px 12px;
@@ -52,7 +52,7 @@
 }
 
 /* Table body cells */
-.requests-table tbody td {
+.clinic-requests-table tbody td {
   padding: 16px 12px;
   border-bottom: 1px solid #e5e7eb;
   color: #4b5563;
@@ -60,33 +60,33 @@
   vertical-align: top;
 }
 
-/* Align columns and rows properly */
-.requests-table th,
-.requests-table td {
+/* Column alignment and overflow */
+.clinic-requests-table th,
+.clinic-requests-table td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* First column alignment fix */
-.requests-table td:first-child,
-.requests-table th:first-child {
+/* First column padding fix */
+.clinic-requests-table td:first-child,
+.clinic-requests-table th:first-child {
   padding-left: 20px;
 }
 
-/* Last column alignment fix */
-.requests-table td:last-child,
-.requests-table th:last-child {
+/* Last column padding fix */
+.clinic-requests-table td:last-child,
+.clinic-requests-table th:last-child {
   padding-right: 20px;
 }
 
-/* Row hover effect */
-.requests-table tbody tr:hover {
+/* Hover effect for rows */
+.clinic-requests-table tbody tr:hover {
   background-color: #f3f4f6;
 }
 
 /* Status badges */
-.status-badge {
+.clinic-status-badge {
   display: inline-block;
   padding: 4px 10px;
   border-radius: 12px;
@@ -94,23 +94,23 @@
   font-weight: 500;
 }
 
-.status-pending {
+.clinic-status-pending {
   background-color: #fef3c7;
   color: #92400e;
 }
 
-.status-accepted {
+.clinic-status-accepted {
   background-color: #d1fae5;
   color: #065f46;
 }
 
-.status-rejected {
+.clinic-status-rejected {
   background-color: #fee2e2;
   color: #991b1b;
 }
 
 /* Action buttons */
-.action-btn {
+.clinic-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -124,38 +124,38 @@
   background: transparent;
 }
 
-.accept-btn {
+.clinic-accept-btn {
   color: #10b981;
 }
 
-.accept-btn:hover {
+.clinic-accept-btn:hover {
   background-color: #d1fae5;
 }
 
-.reject-btn {
+.clinic-reject-btn {
   color: #ef4444;
 }
 
-.reject-btn:hover {
+.clinic-reject-btn:hover {
   background-color: #fee2e2;
 }
 
 /* Scrollbar styling */
-.requests-container::-webkit-scrollbar {
+.clinic-requests-container::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.requests-container::-webkit-scrollbar-track {
+.clinic-requests-container::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
 
-.requests-container::-webkit-scrollbar-thumb {
+.clinic-requests-container::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 10px;
 }
 
-.requests-container::-webkit-scrollbar-thumb:hover {
+.clinic-requests-container::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }

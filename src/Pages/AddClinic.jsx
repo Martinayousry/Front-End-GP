@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'sonner';
 
-
 export default function AddClinic() {
   const [form, setForm] = useState({
     name: "",
@@ -20,6 +19,7 @@ export default function AddClinic() {
     cLinicEmail: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -29,17 +29,19 @@ export default function AddClinic() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/login");
-    return;
-  }
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
-      await axios.post("/api/Clinic", form,{
+      await axios.post("/api/Clinic", form, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       toast.custom((t) => (
         <div className="w-[400px] bg-white shadow-xl border border-[#dfe6dc] rounded-2xl p-5 flex items-start gap-4 animate-in slide-in-from-right duration-500">
           <div className="text-3xl text-[#749260]">
@@ -47,14 +49,14 @@ export default function AddClinic() {
           </div>
           <div className="flex flex-col">
             <p className="text-lg font-semibold text-[#2d3e2f]">Clinic Created</p>
-            <p className="text-sm text-gray-600 ">
+            <p className="text-sm text-gray-600">
               Your clinic has been successfully added.
             </p>
           </div>
           <button
             onClick={() => {
               toast.dismiss(t);
-              navigate("/clinics");
+              navigate("/doctor/clinics"); // Consistent navigation
             }}
             className="ml-auto text-sm text-[#749260] font-medium hover:underline"
           >
@@ -63,9 +65,13 @@ export default function AddClinic() {
         </div>
       ));
       
-      setTimeout(() => navigate("/clinics"), 1000);
+      // Navigate after 1 second (same as in toast)
+      setTimeout(() => navigate("/doctor/clinics"), 1000);
     } catch (error) {
       console.error("Error adding clinic:", error);
+      toast.error("Failed to add clinic. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -99,6 +105,7 @@ export default function AddClinic() {
               <Label htmlFor="cLinicEmail" className='mb-2'>Clinic Email</Label>
               <Input
                 name="cLinicEmail"
+                type="email"
                 value={form.cLinicEmail}
                 onChange={handleChange}
                 required
@@ -109,6 +116,7 @@ export default function AddClinic() {
               <Label htmlFor="number" className='mb-2'>Clinic Phone Number</Label>
               <Input
                 name="number"
+                type="tel"
                 value={form.number}
                 onChange={handleChange}
                 required
@@ -119,6 +127,7 @@ export default function AddClinic() {
               <Label htmlFor="locationUrl" className='mb-2'>Google Maps URL</Label>
               <Input
                 name="locationUrl"
+                type="url"
                 value={form.locationUrl}
                 onChange={handleChange}
                 required
@@ -151,9 +160,10 @@ export default function AddClinic() {
               <Button
                 type="submit"
                 className="bg-[#749260] hover:bg-[#5c7b4e] text-white"
+                disabled={isSubmitting}
               >
-                Add Clinic
-                <i className="fa-solid fa-house-chimney-medical"></i>
+                {isSubmitting ? "Adding..." : "Add Clinic"}
+                <i className="fa-solid fa-house-chimney-medical ml-2"></i>
               </Button>
             </div>
           </form>
