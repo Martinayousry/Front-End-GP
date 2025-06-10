@@ -189,6 +189,42 @@ export default function Home() {
             </div>
           ))}
         </div> */}
+        
+        {/* Who Are We Section */}
+<div className="bg-green-50 py-16 px-6 rounded-xl shadow-inner mt-20">
+  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    {/* Image */}
+    <div>
+      <img
+        src="/images/Vets-Now-4077-1270x847.jpg"
+        alt="Volunteering with animals"
+        className="rounded-2xl w-full shadow-lg object-cover h-[350px]"
+      />
+    </div>
+
+    {/* Text Content */}
+    <div>
+      <p className="text-green-700 text-md uppercase font-semibold mb-2">
+        Who Are We
+      </p>
+      <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight text-gray-800">
+        Passionate About Helping Animals & Building a Pet-Loving Community
+      </h2>
+      <p className="text-gray-700 mb-6 text-lg">
+        We’re a team of animal lovers, vets, and volunteers working to provide care,
+        shelter, and second chances for every pet. Whether you're here to adopt,
+        seek help, or give back — you're part of our mission.
+      </p>
+      <Link
+        to="/volunteering"
+        className="inline-block bg-green-700 text-white px-6 py-3 rounded-lg shadow hover:bg-green-800 transition"
+      >
+        Volunteer With Us
+      </Link>
+    </div>
+  </div>
+</div>
+
       </div>
     </>
   );

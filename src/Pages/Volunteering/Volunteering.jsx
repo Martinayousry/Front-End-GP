@@ -1,129 +1,119 @@
+// 
 import React from "react";
-import "./Volunteering.css";
-import "react-icons/md";
-import * as Icons from "react-icons/md";
+import { MdOutlineLocationOn, MdOutlineLocalPhone, MdOutlineMail } from "react-icons/md";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { IoMdArrowForward } from "react-icons/io";
 
 const Volunteering = () => {
   return (
-   <div className="mt-15">
-      <div className="volunteer grid grid-cols-2">
-        <div className="pl-25 pt-10 pr-10">
-          <h1 className="font-bold text-2xl border-b-1 border-gray-400 pb-4">
+    <div className="mt-20 bg-white px-6 py-12 max-w-7xl mx-auto rounded-lg shadow-md">
+      <div className="grid md:grid-cols-2 gap-12">
+        {/* Left Section - About Us */}
+        <div>
+          <h1 className="text-3xl font-bold text-green-800 border-b border-gray-300 pb-4 mb-6">
             About Us
           </h1>
-          <p className="py-7 pr-10">
-            Welcome to [Shelter Name], where compassion meets innovation! <br />
-            At [Shelter Name], we are dedicated to providing a safe and loving
-            environment for animals in need. Our mission is to rescue,
-            rehabilitate, and rehome abandoned and stray animals, ensuring they
-            find the caring families they deserve. <br />
-            What sets us apart is our use of cutting-edge technology to enhance
-            animal welfare. Our smart features include advanced health
-            monitoring, such as detecting pregnancy in dogs, and tools that help
-            us match potential adopters with the perfect furry companion. <br />
-            In addition to adoption services, we empower our community through
-            education and support. From hosting workshops on responsible pet
-            ownership to collaborating with local organizations, we aim to make
-            a lasting impact on animal welfare. <br />
-            Whether you’re looking to adopt, foster, volunteer, or donate, you
-            are an essential part of our mission to create a brighter future for
-            animals. Together, we can transform lives—one paw at a time. <br />
-            Join us on this journey of hope, love, and care.
+          <p className="text-gray-700 space-y-4 leading-relaxed">
+            <span>
+              Welcome to <strong>PetsyZone</strong>, where compassion meets innovation!
+              We provide a safe and loving environment for animals in need — rescuing,
+              rehabilitating, and rehoming them into caring families.
+            </span>
+            <br />
+            <span>
+              Our tech-driven approach includes tools like health monitoring, pregnancy detection,
+              and smart adoption matching to improve animal welfare.
+            </span>
+            <br />
+            <span>
+              We also empower communities through education and collaboration with local organizations.
+              Whether you adopt, foster, volunteer, or donate — you're part of our mission.
+            </span>
+            <br />
+            <span>Together, we can transform lives — one paw at a time.</span>
           </p>
-          <div className="relative inline-block p-4">
-            <Icons.MdOutlineLocationOn
-              size={30}
-              className="absolute top-5 left-0 "
-            />
-            <span className="inline-flex relative text-lg pl-5 pr-30">
-              1195 Corniche El Nile Street, Cairo. The administration office is
-              situated in Tower (D), 4th Floor, Apartment 41, Arcadia
-              Administrative Towers, Corniche El Nile Street, Cairo.
-            </span>
-          </div>
-          <div className="relative inline-block p-4">
-            <Icons.MdOutlineLocalPhone
-              size={30}
-              className="absolute top-5 left-0 "
-            />
-            <span className="inline-flex relative text-lg pl-5 pr-30">
-              {" "}
-              25769361 (202+){" "}
-            </span>
-          </div>
-          <div className="relative inline-block p-4">
-            <AiOutlineGlobal size={30} className="absolute top-5 left-0 " />
-            <span className="inline-flex relative text-lg pl-5 pr-30">
-              {" "}
-              petsyzoneclinic.com
-            </span>
-          </div>
-          <div className="relative inline-block p-4">
-            <Icons.MdOutlineMail size={30} className="absolute top-5 left-0 " />
-            <span className="inline-flex relative text-lg pl-5 pr-30">
-              {" "}
-              info@petsyzoneclinic.com
-            </span>
+
+          {/* Contact Info */}
+          <div className="mt-10 space-y-4">
+            <div className="flex items-start gap-3">
+              <MdOutlineLocationOn size={24} className="text-green-700 mt-1" />
+              <span className="text-gray-700">
+                1195 Corniche El Nile Street, Cairo. Tower (D), 4th Floor, Apt 41, Arcadia Administrative Towers.
+              </span>
+            </div>
+            <div className="flex items-start gap-3">
+              <MdOutlineLocalPhone size={24} className="text-green-700 mt-1" />
+              <span className="text-gray-700">+202 25769361</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <AiOutlineGlobal size={24} className="text-green-700 mt-1" />
+              <span className="text-gray-700">petsyzoneclinic.com</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <MdOutlineMail size={24} className="text-green-700 mt-1" />
+              <span className="text-gray-700">info@petsyzoneclinic.com</span>
+            </div>
           </div>
         </div>
-        <div className="right  col-span-1 pl-15 pt-10 pr-10">
-          <h1 className="font-bold text-2xl pb-10">Join Us Now!</h1>
-          <form>
-            <div className="mb-5">
-              <label>Name</label> <br />
+
+        {/* Right Section - Form */}
+        <div>
+          <h1 className="text-3xl font-bold text-green-800 mb-8">Join Us Now!</h1>
+          <form className="space-y-6">
+            <div>
+              <label className="block font-medium mb-1">Name</label>
               <input
                 type="text"
                 required
-                className="input-field"
+                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your full name"
               />
             </div>
-            <div className="mb-5">
-              <label>Age</label> <br />
+            <div>
+              <label className="block font-medium mb-1">Age</label>
               <input
                 type="number"
                 required
-                className="input-field"
+                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your age"
               />
             </div>
-            <div className="mb-5">
-              <label>Gender</label> <br />
-              <input type="radio" id="male" name="gender" value="male" />
-              <label htmlFor="male" className="m-3">
-                Male
-              </label>
-              <input type="radio" id="female" name="gender" value="female" />
-              <label htmlFor="female" className="m-3">
-                Female
-              </label>
+            <div>
+              <label className="block font-medium mb-1">Gender</label>
+              <div className="flex items-center gap-4 mt-1">
+                <label className="flex items-center gap-2">
+                  <input type="radio" name="gender" value="male" required />
+                  <span>Male</span>
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="radio" name="gender" value="female" required />
+                  <span>Female</span>
+                </label>
+              </div>
             </div>
-            <div className="mb-5">
-              <label>Government</label> <br />
+            <div>
+              <label className="block font-medium mb-1">Government</label>
               <input
                 type="text"
                 required
-                className="input-field"
-                placeholder="Enter your government"
+                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter your governorate"
               />
             </div>
-            <div className="mb-5">
-              <label>Why do you want to join us?</label> <br />
-              <input
-                type="text"
+            <div>
+              <label className="block font-medium mb-1">Why do you want to join us?</label>
+              <textarea
                 required
-                className="input-field size-40"
-                placeholder="Write your answer ...."
+                rows="4"
+                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Write your answer..."
               />
             </div>
             <button
               type="submit"
-              className="submit-button inline-flex items-center justify-center px-4 py-2 my-20 ml-80"
+              className="bg-green-700 hover:bg-green-800 text-white font-medium px-6 py-3 rounded flex items-center gap-2 transition"
             >
-              Submit
-              <IoMdArrowForward className="text-2xl ml-2" />
+              Submit <IoMdArrowForward />
             </button>
           </form>
         </div>

@@ -20,7 +20,7 @@ const Post = () => {
   const [previewImages, setPreviewImages] = useState([]);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
-  const { token } = useAuth();
+  const { token,user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -152,6 +152,9 @@ const Post = () => {
         <h1 className="text-3xl font-bold text-[#749260] flex items-center">
           <FaPaw className="mr-3" /> Lost Dog Posts
         </h1>
+         <p className="text-gray-600 italic mb-6 font-bold">
+        “Every paw has a story. Help bring them home”
+      </p>
         <button 
           onClick={() => setShowModal(true)}
           className="bg-[#749260] hover:bg-[#658153] text-white px-6 py-3 rounded-lg shadow-md transition-all duration-300 flex items-center"
@@ -297,12 +300,14 @@ const Post = () => {
                     )}
                   </ul>
                   
-                  <button 
-                    onClick={() => handleChatClick(post.owner.id)}
-                    className="w-full mt-4 bg-[#749260] hover:bg-[#658153] text-white py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
-                  >
-                    <FaCommentDots className="mr-2" /> Message Owner
-                  </button>
+                 {user?.id !== post.owner.id && (
+  <button 
+    onClick={() => handleChatClick(post.owner.id)}
+    className="w-full mt-4 bg-[#749260] hover:bg-[#658153] text-white py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
+  >
+    <FaCommentDots className="mr-2" /> Message Owner
+  </button>
+)}
                 </div>
               </div>
             </div>
