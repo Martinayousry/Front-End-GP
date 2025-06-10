@@ -1,38 +1,102 @@
 .side-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 15%;
-    height: 100%;
-    background-color: #eff0f6;
-    color: #626262;
-    padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16vw;
+  min-width: 210px;
+  max-width: 280px;
+  height: 100vh;
+  background: linear-gradient(135deg, #f1f5f8 60%, #e3e9df 100%);
+  color: #2d3e2f;
+  padding-top: 36px;
+  z-index: 40;
+  box-shadow: 0 0 18px 2px rgba(116, 146, 96, 0.10);
+  border-right: 1.5px solid #e0e7ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-nav ul {
+  width: 100%;
+  margin-top: 18px;
+  list-style: none;
+  padding: 0;
+}
+
+.side-nav ul li {
+  text-align: center;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+.side-nav ul li a,
+.side-nav ul li .logout-btn {
+  color: #2d3e2f;
+  background: none;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+  padding: 12px 20px;
+  border-radius: 12px;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  margin: 0 22px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: calc(100% - 44px);
+}
+
+.side-nav ul li a.active,
+.side-nav ul li a:hover,
+.side-nav ul li .logout-btn:hover {
+  background: linear-gradient(90deg, #74926020 80%, #e3e9df 100%);
+  color: #749260;
+  box-shadow: 0 2px 8px 0 rgba(116, 146, 96, 0.07);
+}
+
+.side-nav ul li .logout-btn {
+  text-align: left;
+}
+
+.side-nav .logo-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.side-nav .logo-title {
+  width: 98px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.side-title {
+  font-weight: 700;
+  color: #749260;
+  font-size: 1.55rem;
+  font-family: 'Qwigley', cursive, 'Segoe UI', Arial;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 16px #74926011;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .side-nav {
+    width: 19vw;
+    min-width: 145px;
+    max-width: 190px;
+    padding-top: 16px;
   }
-  
-  .side-nav ul li {
-    padding: 20px;
-    text-align: center;
+  .side-nav .logo-title {
+    width: 80px;
+    height: 28px;
   }
-  
-  .side-nav ul li a {
-    color: #626262;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    border-radius: 10px;
+  .side-title {
+    font-size: 1.1rem;
   }
-  
-  .side-nav ul li a:hover {
-    background-color: #e3e9df;
-  }
-  .side-nav img {
-    width: 50px;
-    height: 50px;
-  }
-  .side-nav p {
-    font-weight: 500;
-    color: #749260;
-    font-size: x-large;
-    font-style: oblique;
-    font-family: "Qwigley";
-  }
+}
