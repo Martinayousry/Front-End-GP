@@ -1,178 +1,14 @@
-// import React, { useState } from "react";
-// import "./PetSitter.css";
-// import { IoMdArrowForward } from "react-icons/io";
-// import axios from "axios";
-// import { useAuth } from "../../context/AuthContext";
-// import ThankYou from "../../components/ThankYou";
-
-// const PetSitter = () => {
-//   const [showModal, setShowModal] = useState(false);
-//   const { token } = useAuth();
-
-//   const [formData, setFormData] = useState({
-//     number: "",
-//     startDate: "",
-//     endtDate: "",
-//     healthIssues: "",
-//     breed: "",
-//     age: "",
-//     notes: ""
-//   });
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     const form = e.target.closest("form");
-//     if (!form.checkValidity()) {
-//       form.reportValidity();
-//       return;
-//     }
-
-//     try {
-//       const response = await axios.post("api/PetSitterRequests", formData, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json"
-//         }
-//       });
-//       console.log("Request successful:", response.data);
-//       setShowModal(true);
-//     } catch (error) {
-//       console.error("Error:", error.response?.data || error.message);
-//     }
-//   };
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   return (
-//     <div className="add-pet mt-15">
-//       <p className="text-center p-10 text-xl">Pet Sitter Form </p>
-//       <div className="add-pet-form">
-//         <form onSubmit={handleSubmit}>
-//           <div className="flex flex-row gap-10 items-center pt-7">
-//             <div>
-//               <label htmlFor="number">Contact Number</label> <br />
-//               <input
-//                 type="text"
-//                 id="number"
-//                 name="number"
-//                 className="input-field"
-//                 required
-//                 value={formData.number}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//             <div>
-//               <label htmlFor="age">Pet Age</label> <br />
-//               <input
-//                 type="text"
-//                 id="age"
-//                 name="age"
-//                 className="input-field"
-//                 required
-//                 value={formData.age}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//           </div>
-//           <div className="flex flex-row gap-10 items-center pt-5">
-//             <div>
-//               <label htmlFor="startDate">Start Date</label> <br />
-//               <input
-//                 type="datetime-local"
-//                 id="startDate"
-//                 name="startDate"
-//                 className="input-field"
-//                 required
-//                 value={formData.startDate}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//             <div>
-//               <label htmlFor="endtDate">End Date</label> <br />
-//               <input
-//                 type="datetime-local"
-//                 id="endtDate"
-//                 name="endtDate"
-//                 className="input-field"
-//                 required
-//                 value={formData.endtDate}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//           </div>
-//           <div className="flex flex-row gap-10 items-center pt-5">
-//             <div>
-//               <label htmlFor="breed">Breed</label> <br />
-//               <input
-//                 type="text"
-//                 id="breed"
-//                 name="breed"
-//                 className="input-field"
-//                 required
-//                 value={formData.breed}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//             <div>
-//               <label htmlFor="healthIssues">Health Issues</label> <br />
-//               <input
-//                 type="text"
-//                 id="healthIssues"
-//                 name="healthIssues"
-//                 className="input-field"
-//                 required
-//                 value={formData.healthIssues}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//           </div>
-//           <div className="flex flex-row gap-10 items-center pt-5">
-//             <div className="w-full">
-//               <label htmlFor="notes">Notes</label> <br />
-//               <input
-//                 type="text"
-//                 id="notes"
-//                 name="notes"
-//                 className="input-field w-full"
-//                 value={formData.notes}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//           </div>
-
-//           <button
-//             type="submit"
-//             className="submit-button inline-flex items-center justify-center my-12 ml-120"
-//           >
-//             Submit
-//             <IoMdArrowForward className="text-2xl ml-2" />
-//           </button>
-
-//           <ThankYou show={showModal} onClose={() => setShowModal(false)} />
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PetSitter;
-
 import React, { useState } from "react";
 import "./PetSitter.css";
 import { IoMdArrowForward } from "react-icons/io";
 import { FaPhone, FaDog, FaCalendarAlt, FaNotesMedical, FaStickyNote } from "react-icons/fa";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-import ThankYou from "../../components/ThankYou";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PetSitter = () => {
-  const [showModal, setShowModal] = useState(false);
   const { token } = useAuth();
-
   const [formData, setFormData] = useState({
     number: "",
     startDate: "",
@@ -200,9 +36,44 @@ const PetSitter = () => {
         }
       });
       console.log("Request successful:", response.data);
-      setShowModal(true);
+      
+      // Show success toast
+      toast.success('Pet sitter request submitted successfully!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      // Reset form
+      setFormData({
+        number: "",
+        startDate: "",
+        endtDate: "",
+        healthIssues: "",
+        breed: "",
+        age: "",
+        notes: ""
+      });
+
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
+      
+      // Show error toast
+      toast.error('Failed to submit request. Please try again.', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -213,14 +84,15 @@ const PetSitter = () => {
 
   return (
     <div
-  className="add-pet mt-10"
-  style={{
-    backgroundImage: "url('images/hh.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    padding: "4rem 1rem",
-  }}
->
+      className="add-pet mt-10"
+      style={{
+        backgroundImage: "url('images/hh.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        padding: "4rem 1rem",
+      }}
+    >
+      <ToastContainer />
       <h2 className="text-center text-3xl font-bold text-[#4c5d3fe5] mb-10">
         🐾 Pet Sitter Request Form
       </h2>
@@ -321,15 +193,15 @@ const PetSitter = () => {
               <label htmlFor="notes" className="label">
                 <FaStickyNote className="inline-block mr-2 text-[#749260E5]" /> Additional Notes
               </label>
-          <textarea
-  id="notes"
-  name="notes"
-  rows="4"
-  className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#749260E5]"
-  placeholder="Enter any additional notes here..."
-  value={formData.notes}
-  onChange={handleInputChange}
-/>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#749260E5]"
+                placeholder="Enter any additional notes here..."
+                value={formData.notes}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
 
@@ -342,8 +214,6 @@ const PetSitter = () => {
               <IoMdArrowForward className="text-2xl ml-2" />
             </button>
           </div>
-
-          <ThankYou show={showModal} onClose={() => setShowModal(false)} />
         </form>
       </div>
     </div>

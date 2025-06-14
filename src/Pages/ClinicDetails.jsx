@@ -242,10 +242,10 @@ export default function ClinicDetails() {
       {/* Appointment Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm transition-all duration-300"
-            onClick={() => setShowModal(false)}
-          ></div>
+        <div 
+  className="fixed inset-0 backdrop-blur-sm transition-all duration-300"
+  onClick={() => setShowModal(false)}
+></div>
           <div className="bg-white rounded-2xl p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl border border-[#e0e7ef]">
             <div className="flex justify-between items-center mb-7 border-b pb-3">
               <h2 className="text-3xl font-bold text-[#749260] flex items-center gap-2"><i className="fa-solid fa-calendar-plus"></i> Book Appointment</h2>

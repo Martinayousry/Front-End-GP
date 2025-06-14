@@ -120,14 +120,14 @@ const DoctorSignup = () => {
 
             {errorMessage && <p className="error-text">{errorMessage}</p>}
 
-            <button type="submit" className="login-btn">
+            <button type="submit" className="login-btn mt-5">
               Sign Up
             </button>
 
-            <button type="button" className="google-btn">
-              <img src="/google-icon.svg" alt="Google" />
+            {/* <button type="button" className="google-btn">
+              <img src="/images/google-icon.svg" alt="Google" />
               Sign up with Google
-            </button>
+            </button> */}
           </form>
 
           <p className="signup-text">

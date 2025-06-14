@@ -44,7 +44,7 @@ const Login = () => {
           <p>Please enter your details</p>
 
           <form onSubmit={handleLogin}>
-            <label>Email address</label>
+            <label>Username</label>
             <input
               type="text"
               placeholder="Enter your username"
@@ -85,14 +85,14 @@ const Login = () => {
               </a>
             </div>
 
-            <button type="submit" className="login-btn">
+            <button type="submit" className="login-btn mt-5">
               Sign in
             </button>
 
-            <button type="button" className="google-btn">
+            {/* <button type="button" className="google-btn">
               <img src="/google-icon.svg" alt="Google" />
               Sign in with Google
-            </button>
+            </button> */}
           </form>
 
           <p className="signup-text">

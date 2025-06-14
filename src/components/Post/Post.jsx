@@ -266,7 +266,7 @@ const Post = () => {
                         <FaUser className="text-[#749260] text-sm" />
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Posted By</p>
+                        {/* <p className="text-xs text-gray-500">Posted By</p> */}
                         <p className="font-medium">{post.owner.userName}</p>
                       </div>
                     </li>
@@ -277,7 +277,7 @@ const Post = () => {
                           <FaEnvelope className="text-[#749260] text-sm" />
                         </div>
                         <div>
-                          <p className="text-xs text-gray-500">Email</p>
+                          {/* <p className="text-xs text-gray-500">Email</p> */}
                           <a href={`mailto:${post.owner.email}`} className="font-medium hover:underline">
                             {post.owner.email}
                           </a>
@@ -291,7 +291,7 @@ const Post = () => {
                           <FaPhone className="text-[#749260] text-sm" />
                         </div>
                         <div>
-                          <p className="text-xs text-gray-500">Phone</p>
+                          {/* <p className="text-xs text-gray-500">Phone</p> */}
                           <a href={`tel:${post.owner.phoneNumber}`} className="font-medium hover:underline">
                             {post.owner.phoneNumber}
                           </a>

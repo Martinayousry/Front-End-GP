@@ -38,11 +38,11 @@ const DoctorSidenav = () => {
             Messages <i className="fa-solid fa-comments"></i>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/adoption/animal-adopt">
             Animals <i className="ms-2 fa-solid fa-dog"></i>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/login">
             <button onClick={logout}>Logout</button>
